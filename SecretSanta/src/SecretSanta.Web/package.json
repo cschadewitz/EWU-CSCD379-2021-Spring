@@ -1,0 +1,27 @@
+{
+  "name": "secretsanta.web",
+  "version": "1.0.0",
+  "description": "Website to perform interation with the Secret Santa API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cschadewitz/EWU-CSCD379-2021-Spring.git"
+  },
+  "keywords": [
+    "Secret",
+    "Santa",
+    "Gift",
+    "Exchange",
+    "Christmas",
+    "Holiday"
+  ],
+  "author": "Casey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/issues"
+  },
+  "homepage": "https://github.com/cschadewitz/EWU-CSCD379-2021-Spring#readme"
+}
