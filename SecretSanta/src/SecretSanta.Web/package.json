@@ -2,9 +2,8 @@
   "name": "secretsanta.web",
   "version": "1.0.0",
   "description": "Website to perform interation with the Secret Santa API",
-  "main": "index.js",
   "scripts": {
-    "build:dev": "webpack --mode development",
+    "build:dev": "webpack --mode development --watch",
     "build:prod": "export NODE_ENV=production && webpack --mode production"
   },
   "repository": {

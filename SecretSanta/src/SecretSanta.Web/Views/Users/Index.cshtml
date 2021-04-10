@@ -1,0 +1,9 @@
+﻿@model List<UserViewModel>
+
+@{int counter = 0;}
+
+@foreach(var user in Model) { 
+<section>
+    @counter - @user.FirstName @user.LastName @{counter++;}
+</section>
+}
