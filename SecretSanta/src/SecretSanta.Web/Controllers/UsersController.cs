@@ -12,63 +12,76 @@ namespace SecretSanta.Web.Controllers
     public class UsersController : Controller
     {
         // GET: UsersController
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View(MockData.Users);
         }
 
         // GET: UsersController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
             return View();
         }
 
         // GET: UsersController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
-
-        // GET: UsersController/Edit/5
-        public ActionResult Edit(int id)
+        //POST: UsersController/Create
+        [HttpPost]
+        public IActionResult Create(UserViewModel user)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                user.Id = MockData.UsersNextId();
+                MockData.Users.Add(user);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(user);
+        }
+        // GET: UsersController/Edit/5
+        public IActionResult Edit(int id)
+        {
+            return View(MockData.Users.Where(u => u.Id == id).FirstOrDefault());
         }
 
         // POST: UsersController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(UserViewModel user)
         {
-            try
+            if (ModelState.IsValid)
             {
+                var updatedUser = MockData.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+                updatedUser.FirstName = user.FirstName;
+                updatedUser.LastName = user.LastName;
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: UsersController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            return View(user);
         }
 
         // POST: UsersController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            MockData.Users.Remove(MockData.Users.Where(u => u.Id == id).FirstOrDefault());
+            return RedirectToAction(nameof(Index));
         }
+
+        //// POST: UsersController/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
