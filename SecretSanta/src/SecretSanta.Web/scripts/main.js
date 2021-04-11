@@ -1,1 +1,1 @@
-"use strict";
+import '../styles/site.css';

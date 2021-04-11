@@ -90,11 +90,9 @@ module.exports = (env, argv) => {
             //     ]
             // }),
 
-            //new MiniCssExtractPlugin({
-            //    filename: 'css/[name].[hash].css',
-            //    path: distPath,
-            //    publicPath: '/'
-            //}),
+            new MiniCssExtractPlugin({
+                filename: 'css/[name].[fullhash].css'
+            }),
 
             new HtmlWebpackPlugin({
                 filename: path.resolve(templatePath, './_Layout.cshtml'),

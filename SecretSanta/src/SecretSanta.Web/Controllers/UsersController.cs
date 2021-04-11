@@ -52,7 +52,7 @@ namespace SecretSanta.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var updatedUser = MockData.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+                UserViewModel updatedUser = MockData.Users.Where(u => u.Id == user.Id).FirstOrDefault();
                 updatedUser.FirstName = user.FirstName;
                 updatedUser.LastName = user.LastName;
                 return RedirectToAction(nameof(Index));
@@ -65,7 +65,8 @@ namespace SecretSanta.Web.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            MockData.Users.Remove(MockData.Users.Where(u => u.Id == id).FirstOrDefault());
+            if(MockData.Users.Where(u => u.Id == id).FirstOrDefault() is not null)
+                MockData.Users.Remove(MockData.Users.Where(u => u.Id == id).FirstOrDefault());
             return RedirectToAction(nameof(Index));
         }
 
