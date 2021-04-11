@@ -1,0 +1,19 @@
+﻿@model GroupViewModel
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Group</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Groups" asp-action="@ViewData["Title"]" method="post">
+            <div class="form-group">
+                <label asp-for="GroupName" class="control-label"></label>:
+                <input type="text" asp-for="GroupName" class="form-control" />
+                <span asp-validation-for="GroupName" class="text-danger"></span>
+            </div>
+            <button>Save</button>
+            <a asp-action="Index">Cancel</a>
+        </form>
+    </div>
+</div>

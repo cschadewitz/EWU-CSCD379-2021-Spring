@@ -2,24 +2,4 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>Group</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Groups" asp-action="Create" method="post">
-            <div class="form-group">
-                <label asp-for="GroupName" class="control-label"></label>: 
-                <input type="text" asp-for="GroupName" class="form-control" />
-                <span asp-validation-for="GroupName" class="text-danger"></span>
-            </div>
-            <button>Create</button>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@await Html.PartialAsync("_CreateOrEdit")
