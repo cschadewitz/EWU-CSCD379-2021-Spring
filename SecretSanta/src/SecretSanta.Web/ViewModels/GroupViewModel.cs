@@ -11,7 +11,6 @@ namespace SecretSanta.Web.ViewModels
     {
         public int Id { get; set; }
         [Required]
-
         [Display(Name = "Group Name")]
         public string GroupName { get; set; }
     }
