@@ -14,7 +14,7 @@
                         <label asp-for="Title" class="control-label"></label>
                     </div>
                     <div class="w-2/3">
-                        <input type="text" asp-for="Title" class="form-control focus:ring-2 focus:ring-primary-50" />
+                        <input type="text" asp-for="Title" class="form-control focus:ring-2 focus:ring-green-500" />
                     </div>
                 </div>
                 <span asp-validation-for="Title" class="text-danger"></span>
@@ -23,7 +23,7 @@
                         <label asp-for="Priority" class="control-label"></label>
                     </div>
                     <div class="w-2/3">
-                        <input type="number" asp-for="Priority" class="form-control focus:ring-2 focus:ring-primary-50" />
+                        <input type="number" asp-for="Priority" class="form-control focus:ring-2 focus:ring-green-500" />
                     </div>
                     <span asp-validation-for="Priority" class="text-danger"></span>
                 </div>
@@ -34,7 +34,7 @@
                         <label asp-for="Description" class="control-label"></label>
                     </div>
                     <div class="w-2/3">
-                        <input type="text" asp-for="Description" class="form-control focus:ring-2 focus:ring-primary-50" />
+                        <input type="text" asp-for="Description" class="form-control focus:ring-2 focus:ring-green-500" />
                     </div>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
@@ -45,7 +45,7 @@
                         <label asp-for="Url" class="control-label"></label>
                     </div>
                     <div class="w-2/3">
-                        <input type="url" asp-for="Url" class="form-control focus:ring-2 focus:ring-primary-50" />
+                        <input type="url" asp-for="Url" class="form-control focus:ring-2 focus:ring-green-500" />
                     </div>
                     <span asp-validation-for="Url" class="text-danger"></span>
                 </div>
@@ -56,7 +56,7 @@
                         <label asp-for="UserId" class="control-label"></label>
                     </div>
                     <div class="w-2/3">
-                        <select asp-for="UserId" asp-items="@(new SelectList(MockData.Users, "Id", "FullName"))" class="form-control focus:ring-2 focus:ring-primary-50">
+                        <select asp-for="UserId" asp-items="@(new SelectList(MockData.Users, "Id", "FullName"))" class="form-control focus:ring-2 focus:ring-green-500">
 
                             <option>Users</option>
                         </select>
@@ -64,8 +64,8 @@
                     <span asp-validation-for="UserId" class="text-danger"></span>
                 </div>
             </div>
-            <button class="border border-6 border-primary-70 rounded-full p-3 bg-primary-10">Save</button>
-            <a class="border border-6 border-primary-70 rounded-full p-3 bg-primary-10" asp-action="Index">Cancel</a>
+            <button class="border border-6 border-gray-400 rounded-full p-3 bg-gray-400">Save</button>
+            <a class="border border-6 border-gray-400 rounded-full p-3 bg-gray-400" asp-action="Index">Cancel</a>
         </form>
     </div>
 </div>
