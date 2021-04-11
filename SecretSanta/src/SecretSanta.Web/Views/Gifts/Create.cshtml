@@ -7,29 +7,39 @@
 
 <h4>Gift</h4>
 <hr />
-<form asp-controller="Gifts" asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="Title"></label>:
-        <input type="text" asp-for="Title" />
-        <span asp-validation-for="Title" class="text-danger"></span>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Gifts" asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>:
+                <input type="text" asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>:
+                <input type="text" asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Url" class="control-label"></label>:
+                <input type="text" asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Priority" class="control-label"></label>:
+                <input type="text" asp-for="Priority" class="form-control" />
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId"></label>
+                <select asp-for="UserId" asp-items="@(new SelectList(MockData.Users, "Id", "FullName"))">
+                    <option>Please select one</option>
+                </select>
+            </div>
+            <button>Create</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>:
-        <input type="text" asp-for="Description" />
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Url"></label>:
-        <input type="text" asp-for="Url" />
-        <span asp-validation-for="Url" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Priority"></label>:
-        <input type="text" asp-for="Priority" />
-        <span asp-validation-for="Priority" class="text-danger"></span>
-    </div>
-    <button>Create</button>
-</form>
+</div>
 
 <div>
     <a asp-action="Index">Back to List</a>

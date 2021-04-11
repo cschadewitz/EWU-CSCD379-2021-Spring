@@ -1,10 +1,26 @@
 ﻿@model GroupViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
 
-<form asp-controller="Groups" asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
-    <div>
-        <label asp-for="GroupName"></label>: <input type="text" asp-for="GroupName" />
-        <span asp-validation-for="GroupName"></span>
+<h1>Edit</h1>
+
+<h4>Group</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Groups" asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="GroupName" class="contrl-label"></label>:
+                <input type="text" asp-for="GroupName" class="form-control" />
+                <span asp-validation-for="GroupName" class="text-danger"></span>
+            </div>
+            <button>Save</button>
+        </form>
     </div>
-    <button>Save</button>
-</form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

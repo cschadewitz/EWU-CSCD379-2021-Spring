@@ -1,13 +1,30 @@
 ﻿@model UserViewModel
+@{
+    ViewData["Title"] = "Create";
+}
 
-<form asp-controller="Users" asp-action="Create" method="post">
-    <div>
-        <label asp-for="FirstName"></label>: <input type="text" asp-for="FirstName" />
-        <span asp-validation-for="FirstName"></span>
+<h1>Create</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Users" asp-action="Create" method="post">
+            <div>
+                <label asp-for="FirstName" class="control-label"></label>: 
+                <input type="text" asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="LastName" class="control-label"></label>: 
+                <input type="text" asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <button>Create</button>
+        </form>
     </div>
-    <div>
-        <label asp-for="LastName"></label>: <input type="text" asp-for="LastName" />
-        <span asp-validation-for="LastName"></span>
-    </div>
-    <button>Create</button>
-</form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,11 +1,15 @@
 ﻿@model List<UserViewModel>
 
-@{ int index = 0;}
-@foreach(var user in Model) { 
-<section>
-    @user.Id - @user.FirstName @user.LastName <a asp-controller="Users" asp-action="Edit" asp-route-id=@user.Id>Edit</a>
-    <form asp-controller="Users" asp-action="Delete" asp-route-id=@user.Id method="post"><button>X</button></form>
-    @{ index++;}
-</section>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h1>Users</h1>
+@foreach (var user in Model)
+{
+    <section>
+        @user.Id - @user.FirstName @user.LastName <a asp-controller="Users" asp-action="Edit" asp-route-id=@user.Id>Edit</a>
+        <form asp-controller="Users" asp-action="Delete" asp-route-id=@user.Id method="post"><button>X</button></form>
+    </section>
 }
 <a asp-controller="Users" asp-action="Create">Create</a>
