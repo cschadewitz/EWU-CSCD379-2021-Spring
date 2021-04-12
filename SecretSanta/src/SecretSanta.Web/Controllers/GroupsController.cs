@@ -36,7 +36,7 @@ namespace SecretSanta.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-                group.Id = MockData.GroupsNextId();
+                group.Id = MockData.GroupsNextId;
                 MockData.Groups.Add(group);
                 return RedirectToAction(nameof(Index));
             }

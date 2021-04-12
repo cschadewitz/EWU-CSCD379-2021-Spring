@@ -34,7 +34,7 @@ namespace SecretSanta.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.Id = MockData.UsersNextId();
+                user.Id = MockData.UsersNextId;
                 MockData.Users.Add(user);
                 return RedirectToAction(nameof(Index));
             }
