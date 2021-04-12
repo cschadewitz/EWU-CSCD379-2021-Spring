@@ -4,12 +4,38 @@
     ViewData["Title"] = "Groups";
 }
 
-<h1>Groups</h1>
-@foreach (var group in Model)
-{
-    <section>
-        @group.Id - @group.GroupName <a asp-controller="Groups" asp-action="Edit" asp-route-id=@group.Id>Edit</a>
-        <form asp-controller="Groups" asp-action="Delete" asp-route-id=@group.Id method="post"><button>X</button></form>
-    </section>
-}
-<a asp-controller="Groups" asp-action="Create">Create</a>
+<h1 class="bg-red-500 text-xl">Groups</h1>
+<hr />
+<div class="table w-full ">
+    <div class="table-header-group">
+        <div class="table-cell-bordered">Id</div>
+        <div class="table-cell-bordered">Group Name</div>
+        <div class="table-cell-bordered">Commands</div>
+    </div>
+
+    <div class="table-row-group">
+        @foreach (var group in Model)
+        {
+            <div class="table-row">
+                <div class="table-cell-bordered">@group.Id</div>
+                <div class="table-cell-bordered">@group.GroupName</div>
+                <div class="table-cell-bordered">
+                    <div class="inline-flex space-x-4">
+                        <div class="flex">
+                            <a class="btn btn-gray" asp-controller="Groups" asp-action="Edit" asp-route-id=@group.Id>Edit</a>
+                        </div>
+                        <div class="flex">
+                            <form asp-controller="Groups" asp-action="Delete" asp-route-id=@group.Id method="post">
+                                <button class="btn btn-gray">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<hr />
+<div class="py-5">
+    <a class="btn btn-gray" asp-controller="Groups" asp-action="Create">Create</a>
+</div>

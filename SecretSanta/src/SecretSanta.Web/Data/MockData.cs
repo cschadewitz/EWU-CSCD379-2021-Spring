@@ -34,8 +34,8 @@ namespace SecretSanta.Web.Data
             return ++groupsLastId;
         }
         public static List<GiftViewModel> Gifts = new List<GiftViewModel>{
-            new GiftViewModel {Id = 0, Title = "FN SCAR-L CQC", Description = "Close quarters combat automatic shotgun", Priority = 1, Url = "", UserId = 2},
-            new GiftViewModel {Id = 1, Title = "Chiappa Rhino 50DS", Description = "Standard issue side arm for UN Black-Ops team", Priority = 1, Url = "", UserId = 4}
+            new GiftViewModel {Id = 0, Title = "FN SCAR-L CQC", Description = "Close quarters combat automatic shotgun", Priority = 1, Url = "https://www.test.com", UserId = 2},
+            new GiftViewModel {Id = 1, Title = "Chiappa Rhino 50DS", Description = "Standard issue side arm for UN Black-Ops team", Priority = 1, Url = "https://www.test.com", UserId = 4}
         };
         public static int GiftsNextId()
         {

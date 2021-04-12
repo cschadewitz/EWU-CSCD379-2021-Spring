@@ -1,8 +1,6 @@
 ﻿@model GroupViewModel
 
-<h1>@ViewData["Title"]</h1>
-
-<h4>Group</h4>
+<h1 class="bg-red-500 text-xl">Group - @ViewData["Title"]</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -13,13 +11,13 @@
                         <label asp-for="GroupName" class="control-label"></label>
                     </div>
                     <div class="w-2/3">
-                        <input type="text" asp-for="GroupName" class="form-control focus:ring-2 focus:ring-green-500" />
+                        <input type="text" asp-for="GroupName" class="form-control" />
                     </div>
                 </div>
-                <span asp-validation-for="GroupName" class="text-danger"></span>
             </div>
-            <button class="border border-6 border-gray-400 rounded-full p-3 bg-gray-400">Save</button>
-            <a class="border border-6 border-gray-400 rounded-full p-3 bg-gray-400" asp-action="Index">Cancel</a>
+            <button class="btn btn-gray">Save</button>
+            <a class="btn btn-gray" asp-action="Index">Cancel</a>
+            <div class="text-2xl text-red-700" asp-validation-summary="All"></div>
         </form>
     </div>
 </div>

@@ -4,12 +4,40 @@
     ViewData["Title"] = "Users";
 }
 
-<h1>Users</h1>
-@foreach (var user in Model)
-{
-    <section>
-        @user.Id - @user.FirstName @user.LastName <a asp-controller="Users" asp-action="Edit" asp-route-id=@user.Id>Edit</a>
-        <form asp-controller="Users" asp-action="Delete" asp-route-id=@user.Id method="post"><button>X</button></form>
-    </section>
-}
-<a asp-controller="Users" asp-action="Create">Create</a>
+<h1 class="bg-red-500 text-xl">Users</h1>
+<hr />
+<div class="table w-full ">
+    <div class="table-header-group">
+        <div class="table-cell-bordered">Id</div>
+        <div class="table-cell-bordered">First Name</div>
+        <div class="table-cell-bordered">Last Name</div>
+        <div class="table-cell-bordered">Commands</div>
+    </div>
+
+    <div class="table-row-group">
+        @foreach (var user in Model)
+        {
+            <div class="table-row">
+                <div class="table-cell-bordered">@user.Id</div>
+                <div class="table-cell-bordered">@user.FirstName</div>
+                <div class="table-cell-bordered">@user.LastName</div>
+                <div class="table-cell-bordered">
+                    <div class="inline-flex space-x-4">
+                        <div class="flex">
+                            <a class="btn btn-gray" asp-controller="Users" asp-action="Edit" asp-route-id=@user.Id>Edit</a>
+                        </div>
+                        <div class="flex">
+                            <form asp-controller="Users" asp-action="Delete" asp-route-id=@user.Id method="post">
+                                <button class="btn btn-gray">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<hr />
+<div class="py-5">
+    <a class="btn btn-gray" asp-controller="Users" asp-action="Create">Create</a>
+</div>

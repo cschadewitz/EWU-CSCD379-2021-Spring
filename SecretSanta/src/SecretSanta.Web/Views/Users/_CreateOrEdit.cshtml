@@ -1,8 +1,6 @@
 ﻿@model UserViewModel
 
-<h1>@ViewData["Title"]</h1>
-
-<h4>User</h4>
+<h1 class="bg-red-500 text-xl">User - @ViewData["Title"]</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -13,22 +11,21 @@
                         <label asp-for="FirstName" class="control-label"></label>
                     </div>
                     <div class="w-2/3">
-                        <input type="text" asp-for="FirstName" class="form-control focus:ring-2 focus:ring-green-500" />
+                        <input type="text" asp-for="FirstName" class="form-control" />
                     </div>
                 </div>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
                 <div class="flex w-1/2">
                     <div class="w-1/3">
                         <label asp-for="LastName" class="control-label"></label>
                     </div>
                     <div class="w-2/3">
-                        <input type="text" asp-for="LastName" class="form-control focus:ring-2 focus:ring-green-500" />
+                        <input type="text" asp-for="LastName" class="form-control" />
                     </div>
                 </div>
-                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-            <button class="border border-6 border-gray-400 rounded-full p-3 bg-gray-400">Save</button>
-            <a class="border border-6 border-gray-400 rounded-full p-3 bg-gray-400" asp-action="Index">Cancel</a>
+            <button class="btn btn-gray">Save</button>
+            <a class="btn btn-gray" asp-action="Index">Cancel</a>
+            <div class="text-2xl text-red-700" asp-validation-summary="All"></div>
         </form>
     </div>
 </div>
