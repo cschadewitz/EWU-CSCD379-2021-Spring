@@ -22,11 +22,11 @@
                 <div class="table-cell-bordered">
                     <div class="inline-flex space-x-4">
                         <div class="flex">
-                            <a class="btn btn-gray" asp-controller="Groups" asp-action="Edit" asp-route-id=@group.Id>Edit</a>
+                            <a class="btn-gray" asp-controller="Groups" asp-action="Edit" asp-route-id=@group.Id>Edit</a>
                         </div>
                         <div class="flex">
                             <form asp-controller="Groups" asp-action="Delete" asp-route-id=@group.Id method="post">
-                                <button class="btn btn-gray">Delete</button>
+                                <button class="btn-gray">Delete</button>
                             </form>
                         </div>
                     </div>
@@ -37,5 +37,5 @@
 </div>
 <hr />
 <div class="py-5">
-    <a class="btn btn-gray" asp-controller="Groups" asp-action="Create">Create</a>
+    <a class="btn-gray" asp-controller="Groups" asp-action="Create">Create</a>
 </div>
