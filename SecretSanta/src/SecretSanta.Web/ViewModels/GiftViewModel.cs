@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SecretSanta.Web.ViewModels
 {
-    public class GiftViewModel
+    public class GiftViewModel : IDataViewModel
     {
         public int Id { get; set; }
         [Required]

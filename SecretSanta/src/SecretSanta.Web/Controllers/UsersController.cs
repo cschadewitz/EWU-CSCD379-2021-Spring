@@ -16,13 +16,6 @@ namespace SecretSanta.Web.Controllers
         {
             return View(MockData.Users);
         }
-
-        // GET: UsersController/Details/5
-        public IActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: UsersController/Create
         public IActionResult Create()
         {
@@ -32,9 +25,8 @@ namespace SecretSanta.Web.Controllers
         [HttpPost]
         public IActionResult Create(UserViewModel user)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && user is not null)
             {
-                user.Id = MockData.UsersNextId;
                 MockData.Users.Add(user);
                 return RedirectToAction(nameof(Index));
             }
@@ -43,21 +35,21 @@ namespace SecretSanta.Web.Controllers
         // GET: UsersController/Edit/5
         public IActionResult Edit(int id)
         {
-            return View(MockData.Users.Where(u => u.Id == id).FirstOrDefault());
+            UserViewModel user = MockData.Users[id];
+            if(user is not null)
+                return View(user);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: UsersController/Edit/5
         [HttpPost]
         public IActionResult Edit(UserViewModel user)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && user is not null)
             {
-                UserViewModel updatedUser = MockData.Users.Where(u => u.Id == user.Id).FirstOrDefault();
-                updatedUser.FirstName = user.FirstName;
-                updatedUser.LastName = user.LastName;
+                MockData.Users[user.Id] = user;
                 return RedirectToAction(nameof(Index));
             }
-
             return View(user);
         }
 
@@ -65,24 +57,10 @@ namespace SecretSanta.Web.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            if(MockData.Users.Where(u => u.Id == id).FirstOrDefault() is not null)
-                MockData.Users.Remove(MockData.Users.Where(u => u.Id == id).FirstOrDefault());
+            UserViewModel user = MockData.Users[id];
+            if(user is not null)
+                MockData.Users.Remove(user);
             return RedirectToAction(nameof(Index));
         }
-
-        //// POST: UsersController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }

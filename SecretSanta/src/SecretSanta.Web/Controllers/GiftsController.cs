@@ -16,13 +16,6 @@ namespace SecretSanta.Web.Controllers
         {
             return View(MockData.Gifts);
         }
-
-        // GET: GiftsController/Details/5
-        public IActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: GiftsController/Create
         public IActionResult Create()
         {
@@ -33,9 +26,8 @@ namespace SecretSanta.Web.Controllers
         [HttpPost]
         public IActionResult Create(GiftViewModel gift)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && gift is not null)
             {
-                gift.Id = MockData.GiftsNextId;
                 MockData.Gifts.Add(gift);
                 return RedirectToAction(nameof(Index));
             }
@@ -45,31 +37,28 @@ namespace SecretSanta.Web.Controllers
         // GET: GiftsController/Edit/5
         public IActionResult Edit(int id)
         {
-            return View(MockData.Gifts.Where(g => g.Id == id).FirstOrDefault());
+            GiftViewModel gift = MockData.Gifts[id];
+            if (gift is not null)
+                return View(gift);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: GiftsController/Edit/5
         [HttpPost]
         public IActionResult Edit(GiftViewModel gift)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && gift is not null)
             {
-                GiftViewModel updatedGift = MockData.Gifts.Where(g => g.Id == gift.Id).FirstOrDefault();
-                updatedGift.Title = gift.Title;
-                updatedGift.Description = gift.Description;
-                updatedGift.Priority = gift.Priority;
-                updatedGift.Url = gift.Url;
-                updatedGift.UserId = gift.UserId;
+                MockData.Gifts[gift.Id] = gift;
                 return RedirectToAction(nameof(Index));
             }
-
             return View(gift);
         }
         // POST: GiftsController/Delete/5
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            GiftViewModel gift = MockData.Gifts.Where(g => g.Id == id).FirstOrDefault();
+            GiftViewModel gift = MockData.Gifts[id];
             if (gift is not null)
                 MockData.Gifts.Remove(gift);
             return RedirectToAction(nameof(Index));

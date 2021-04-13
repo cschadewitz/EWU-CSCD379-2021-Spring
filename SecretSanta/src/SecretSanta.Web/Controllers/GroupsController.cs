@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -18,12 +19,6 @@ namespace SecretSanta.Web.Controllers
             return View(MockData.Groups);
         }
 
-        // GET: GroupsController/Details/5
-        public IActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: GroupsController/Create
         public IActionResult Create()
         {
@@ -34,9 +29,8 @@ namespace SecretSanta.Web.Controllers
         [HttpPost]
         public IActionResult Create(GroupViewModel group)
         {
-            if(ModelState.IsValid)
+            if(ModelState.IsValid && group is not null)
             {
-                group.Id = MockData.GroupsNextId;
                 MockData.Groups.Add(group);
                 return RedirectToAction(nameof(Index));
             }
@@ -46,7 +40,10 @@ namespace SecretSanta.Web.Controllers
         // GET: GroupsController/Edit/5
         public IActionResult Edit(int id)
         {
-            return View(MockData.Groups.Where(g => g.Id == id).FirstOrDefault());
+            GroupViewModel group = MockData.Groups[id];
+            if (group is not null)
+                return View(group);
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -54,10 +51,9 @@ namespace SecretSanta.Web.Controllers
         [HttpPost]
         public IActionResult Edit(GroupViewModel group)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && group is not null)
             {
-                GroupViewModel updatedGroup = MockData.Groups.Where(g => g.Id == group.Id).FirstOrDefault();
-                updatedGroup.GroupName = group.GroupName;
+                MockData.Groups[group.Id] = group;
                 return RedirectToAction(nameof(Index));
             }
 
@@ -67,8 +63,9 @@ namespace SecretSanta.Web.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            if (MockData.Groups.Where(g => g.Id == id).FirstOrDefault() is not null)
-                MockData.Groups.Remove(MockData.Groups.Where(g => g.Id == id).FirstOrDefault());
+            GroupViewModel group = MockData.Groups[id];
+            if (group is not null)
+                MockData.Groups.Remove(group);
             return RedirectToAction(nameof(Index));
         }
     }

@@ -7,8 +7,8 @@ using System.Xml.Linq;
 
 namespace SecretSanta.Web.ViewModels
 {
-    public class UserViewModel
-{
+    public class UserViewModel : IDataViewModel
+    {
         public int Id { get; set; }
         [Required]
         [Display(Name = "First Name")]

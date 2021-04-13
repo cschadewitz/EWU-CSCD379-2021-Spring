@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SecretSanta.Web.ViewModels
 {
-    public class GroupViewModel
+    public class GroupViewModel : IDataViewModel
     {
         public int Id { get; set; }
         [Required]
