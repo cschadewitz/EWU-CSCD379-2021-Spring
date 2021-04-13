@@ -27,3 +27,9 @@
     @apply leading-10;
     @apply hover:bg-green-500;
 }
+.text-homepage-header {
+    @apply text-8xl;
+    @apply bg-gradient-to-r;
+    @apply from-green-500;
+    @apply to-red-500;
+}
