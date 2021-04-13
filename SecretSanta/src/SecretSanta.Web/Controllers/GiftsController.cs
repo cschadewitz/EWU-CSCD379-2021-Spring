@@ -45,6 +45,9 @@ namespace SecretSanta.Web.Controllers
 
         // POST: GiftsController/Edit/5
         [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", 
+            "CA1062:Validate arguments of public methods", 
+            Justification = "GiftViewModel argument is validated with ModelState.IsValid and null check")]
         public IActionResult Edit(GiftViewModel gift)
         {
             if (ModelState.IsValid && gift is not null)

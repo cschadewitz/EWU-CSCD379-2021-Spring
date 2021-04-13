@@ -12,18 +12,19 @@ namespace SecretSanta.Web.ViewModels
         public int Id { get; set; }
         [Required]
         [Display(Name = "Gift Title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
         [Required]
         [Display(Name = "Description")]
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
         [Required]
         [Url]
         [Display(Name = "Url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = "";
         [Required]
         [Range(1, 10, ErrorMessage = "{0} must be between {1} max and {2} min")]
         [Display(Name = "Priority")]
         public int Priority { get; set; }
+        [Required]
         [Display(Name = "User")]
         public int UserId { get; set; }
     }

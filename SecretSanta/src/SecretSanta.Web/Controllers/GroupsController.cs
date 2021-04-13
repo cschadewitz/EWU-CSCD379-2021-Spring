@@ -49,6 +49,9 @@ namespace SecretSanta.Web.Controllers
 
         // POST: GroupsController/Edit/5
         [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design",
+            "CA1062:Validate arguments of public methods",
+            Justification = "GroupViewModel argument is validated with ModelState.IsValid and null check")]
         public IActionResult Edit(GroupViewModel group)
         {
             if (ModelState.IsValid && group is not null)

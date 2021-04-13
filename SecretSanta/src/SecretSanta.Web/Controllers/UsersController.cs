@@ -43,6 +43,9 @@ namespace SecretSanta.Web.Controllers
 
         // POST: UsersController/Edit/5
         [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design",
+            "CA1062:Validate arguments of public methods",
+            Justification = "UserViewModel argument is validated with ModelState.IsValid and null check")]
         public IActionResult Edit(UserViewModel user)
         {
             if (ModelState.IsValid && user is not null)

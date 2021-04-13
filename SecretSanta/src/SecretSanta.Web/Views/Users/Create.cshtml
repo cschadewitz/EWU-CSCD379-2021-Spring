@@ -1,5 +1,6 @@
 ﻿@model UserViewModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "User - Create";
+    ViewData.Add("Action", "Create");
 }
 @await Html.PartialAsync("_CreateOrEdit")

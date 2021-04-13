@@ -1,10 +1,8 @@
 ﻿@model UserViewModel
-
-<h1 class="bg-red-500 text-xl">User - @ViewData["Title"]</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Users" asp-action="@ViewData["Title"]" method="post">
+        <form asp-controller="Users" asp-action="@ViewData.Eval("Action")" method="post">
             <div class="form-group flex mb-6">
                 <div class="flex w-1/2">
                     <div class="w-1/3">

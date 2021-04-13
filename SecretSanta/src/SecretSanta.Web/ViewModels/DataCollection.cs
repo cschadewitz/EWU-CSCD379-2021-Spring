@@ -9,10 +9,11 @@ namespace SecretSanta.Web.ViewModels
     {
         public int NextId { get; set; }
 
-        public DataCollection(IEnumerable<T> items) : base(items)
+        public DataCollection() : base()
         {
-            NextId = base.Count;
+            NextId = 0;
         }
+#pragma warning disable CS8603 // Possible null reference return.
         public new T this[int Id]
         {
             get
@@ -23,7 +24,7 @@ namespace SecretSanta.Web.ViewModels
                 }
                 catch (ArgumentNullException x)
                 {
-                    return null;
+                    return default(T);
                 }
             }
             set
@@ -31,12 +32,16 @@ namespace SecretSanta.Web.ViewModels
                 base[this.FindIndex(g => g.Id == Id)] = value;
             }
         }
+#pragma warning restore CS8603 // Possible null reference return.
 
         public new void Add(T data)
         {
+            if (data is null)
+                return;
             data.Id = NextId;
             base.Add(data);
             NextId++;
         }
     }
+
 }
