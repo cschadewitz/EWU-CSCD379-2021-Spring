@@ -97,6 +97,7 @@
     @apply grid-cols-1;
     @apply gap-4;
     @apply justify-items-center;
+    @apply p-2;
     @apply sm:grid-cols-3;
 }
 

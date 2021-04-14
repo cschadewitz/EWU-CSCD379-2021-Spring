@@ -13,8 +13,8 @@
                 @groupViewModel.Title
             </div>
             <div class="tilelist-item-controls">
-                <a class="btn-gray" asp-action="Edit" asp-route-id=@counter>Edit</a>
-                <form class="btn-gray" asp-action="Delete" asp-route-id=@counter method="post"><button>X</button></form>
+                <a class="list-btn-edit" asp-action="Edit" asp-route-id=@counter>Edit</a>
+                <form class="list-btn-delete" asp-action="Delete" asp-route-id=@counter method="post"><button>X</button></form>
             </div>
             @{counter++;}
         </div>
