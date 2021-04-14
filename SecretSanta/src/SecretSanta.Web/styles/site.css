@@ -59,6 +59,7 @@
 .nav-item {
     @apply text-gray-100;
     @apply p-6;
+    @apply text-2xl;
     @apply leading-10;
 }
 
@@ -71,7 +72,8 @@
 
 .nav-burger {
     @apply nav-item;
-    @apply inline-flex;
+    @apply inline-block;
+    @apply align-middle;
     @apply bg-red-500;
     @apply sm:hidden;
 }
