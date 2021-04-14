@@ -79,6 +79,7 @@
 .nav-list {
     @apply justify-end;
     @apply hidden;
+    @apply w-full;
     @apply sm:visible;
     @apply sm:inline-flex;
 }
@@ -87,6 +88,64 @@
     @apply nav-item;
     @apply inline-block;
     @apply hover:bg-green-500;
+}
+
+/*List Style Section*/
+.tilelist {
+    @apply w-full;
+    @apply grid;
+    @apply grid-cols-1;
+    @apply gap-4;
+    @apply justify-items-center;
+    @apply sm:grid-cols-3;
+}
+
+.tilelist-item {
+    @apply p-2;
+    @apply w-full;
+    @apply flex;
+    @apply flex-wrap;
+    @apply justify-center;
+    @apply border-2;
+}
+
+.tilelist-item-label {
+    @apply p-2;
+    @apply w-full;
+    @apply flex-none;
+    @apply text-center;
+}
+
+.tilelist-item-controls {
+    @apply p-2;
+    @apply grid;
+    @apply flex-none;
+    @apply w-full;
+    @apply grid-cols-2;
+    @apply justify-items-center;
+}
+
+.list-btn-edit {
+    @apply btn-gray;
+    @apply max-w-min;
+    @apply hover:bg-yellow-600;
+}
+
+.list-btn-delete {
+    @apply btn-gray;
+    @apply max-w-min;
+    @apply hover:bg-red-600;
+}
+
+.list-controls {
+    @apply w-full;
+    @apply m-2;
+    @apply p-2;
+}
+
+.list-btn-create {
+    @apply btn-gray;
+    @apply hover:bg-green-600;
 }
 
 /*Form Style Section*/
