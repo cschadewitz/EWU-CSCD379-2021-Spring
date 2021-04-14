@@ -1,7 +1,8 @@
 @model GroupViewModel
+@{
+    ViewData["Title"] = "Group - Create";
+}
 
 <form asp-controller="Groups" asp-action="Create" method="post">
     @await Html.PartialAsync("_CreateOrEdit")
-    <button>Create</button>
-    <a asp-controller="Groups" asp-action="Index">Cancel</a>
 </form>

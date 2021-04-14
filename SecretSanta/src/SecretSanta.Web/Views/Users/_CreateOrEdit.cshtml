@@ -1,12 +1,18 @@
 @model UserViewModel
 
-<div>
-    <label asp-for="FirstName"></label>
-    <input type="text" asp-for="FirstName" />
-    <span asp-validation-for="FirstName"></span>
-</div>
-<div>
-    <label asp-for="LastName"></label>
-    <input type="text" asp-for="LastName" />
-    <span asp-validation-for="LastName"></span>
+<div class="form-content">
+    <div class="form-section-2">
+        <label class="form-label" asp-for="FirstName"></label>
+        <input class="form-input" type="text" asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div class="form-section-2">
+        <label class="form-label" asp-for="LastName"></label>
+        <input class="form-input" type="text" asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div class="form-controls">
+        <button class="form-btn-save">Save</button>
+        <a class="form-btn-cancel" asp-controller="Users" asp-action="Index">Cancel</a>
+    </div>
 </div>

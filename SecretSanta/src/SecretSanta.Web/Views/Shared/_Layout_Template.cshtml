@@ -2,23 +2,27 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>UserGroup - @ViewBag.Title</title>
+    <title>Secret Santa - @ViewBag.Title</title>
     <!-- Stylesheets -->
     <% for (var filename in htmlWebpackPlugin.files.css) { %>
     <link href="~<%= htmlWebpackPlugin.files.css[filename] %>" rel="stylesheet" />
     <% } %>
     <!-- End Stylesheets -->
 </head>
-<body>
-    <nav>
-        <ul>
-            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-            <li><a asp-controller="Users" asp-action="Index">Users</a></li>
-            <li><a asp-controller="Groups" asp-action="Index">Groups</a></li>
-            <li><a asp-controller="Gifts" asp-action="Index">Gifts</a></li>
+<body class="site-body">
+    <nav class="nav">
+        <a class="nav-title" asp-controller="Home" asp-action="Index">Secret Santa</a>
+        <button class="nav-burger">menu</button>
+        <ul class="nav-list w-full">
+            <li><a class="nav-list-link" asp-controller="Users" asp-action="Index">Users</a></li>
+            <li><a class="nav-list-link" asp-controller="Groups" asp-action="Index">Groups</a></li>
+            <li><a class="nav-list-link" asp-controller="Gifts" asp-action="Index">Gifts</a></li>
         </ul>
     </nav>
-    @RenderBody()
+    <div class="site-content">
+        <h1 class="page-header">@ViewData["Title"]</h1>
+        @RenderBody()
+    </div>
 
     <!-- Scripts -->
     <% for (var index in htmlWebpackPlugin.files.js) { %>

@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+    @apply rounded-full;
+    @apply p-3;
+}
+
+.btn-gray {
+    @apply btn;
+    @apply bg-gray-400;
+}
+
+.text-homepage-header {
+    @apply text-8xl;
+    @apply bg-gradient-to-r;
+    @apply from-green-500;
+    @apply to-red-500;
+}
+
+.table-cell-bordered {
+    @apply table-cell;
+    @apply border-2;
+    @apply border-gray-300;
+    @apply p-2;
+}
+.site-body {
+    @apply justify-center;
+    @apply flex;
+    @apply flex-wrap;
+}
+
+.site-content {
+    @apply p-4;
+    @apply flex;
+    @apply flex-wrap;
+    @apply justify-center;
+    @apply w-10/12;
+    @apply lg:max-w-screen-lg;
+}
+
+.page-header {
+    @apply w-full;
+    @apply flex-none;
+    @apply bg-red-500;
+    @apply text-xl;
+    @apply p-2;
+}
+
+/*Nav Style Section*/
+.nav {
+    @apply bg-green-600;
+    @apply flex;
+    @apply w-full;
+    @apply justify-between;
+}
+
+.nav-item {
+    @apply text-gray-100;
+    @apply p-6;
+    @apply leading-10;
+}
+
+.nav-title {
+    @apply nav-item;
+    @apply inline-block;
+    @apply flex-none;
+    @apply bg-red-500;
+}
+
+.nav-burger {
+    @apply nav-item;
+    @apply inline-flex;
+    @apply bg-red-500;
+    @apply sm:hidden;
+}
+
+.nav-list {
+    @apply justify-end;
+    @apply hidden;
+    @apply sm:visible;
+    @apply sm:inline-flex;
+}
+
+.nav-list-link {
+    @apply nav-item;
+    @apply inline-block;
+    @apply hover:bg-green-500;
+}
+
+/*Form Style Section*/
+.form {
+    @apply flex;
+    @apply flex-none;
+    @apply w-full;
+}
+
+.form-content {
+    @apply form;
+    @apply flex-wrap;
+}
+
+.form-section {
+    @apply form-content;
+    @apply p-2;
+}
+
+.form-section-2 {
+    @apply form-section;
+    @apply sm:inline-flex;
+    @apply sm:w-1/2;
+}
+
+.form-element {
+    @apply w-full;
+    @apply flex-none;
+}
+
+.form-input {
+    @apply form-element;
+    @apply focus:ring-1;
+    @apply focus:ring-green-500;
+}
+
+.form-label {
+    @apply form-element;
+}
+
+.form-controls {
+    @apply block;
+}
+
+.form-btn-save {
+    @apply btn;
+    @apply bg-green-200;
+    @apply hover:bg-green-400;
+}
+
+.form-btn-cancel {
+    @apply btn;
+    @apply bg-red-200;
+    @apply hover:bg-red-400;
+}
+
+.input-validation-error {
+    @apply ring-2;
+    @apply ring-red-600;
+}
