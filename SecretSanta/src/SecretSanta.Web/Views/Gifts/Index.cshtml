@@ -6,20 +6,25 @@
 @{int counter = 0;}
 
 <div class="tilelist">
-    @foreach (var groupViewModel in Model)
+    @foreach (var giftViewModel in Model)
     {
         <div class="tilelist-item">
             <div class="tilelist-item-label">
-                @groupViewModel.Title
+                <a class="" asp-action="Edit" asp-route-id=@counter>
+                    @giftViewModel.Title
+                </a>
             </div>
             <div class="tilelist-item-controls">
-                <a class="list-btn-edit" asp-action="Edit" asp-route-id=@counter><i class="fas fa-edit"></i></a>
-                <form class="list-btn-delete" asp-action="Delete" asp-route-id=@counter method="post"><button><i class="fas fa-trash-alt"></i></button></form>
+                <form class="list-btn-delete" asp-action="Delete" asp-route-id=@counter method="post">
+                    <button onclick="return confirm('Are you sure you would like to delete @giftViewModel.Title ?')">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
             </div>
             @{counter++;}
         </div>
     }
 </div>
 <div class="list-controls">
-    <a class="list-btn-create" asp-action="Create"><i class="fas fa-plus"></i></a>
+    <a class="list-btn-create" asp-action="Create">Create <i class="fas fa-plus"></i></a>
 </div>

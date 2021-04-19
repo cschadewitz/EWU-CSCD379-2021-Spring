@@ -25,10 +25,15 @@
     @apply border-gray-300;
     @apply p-2;
 }
+
 .site-body {
     @apply justify-center;
     @apply flex;
     @apply flex-wrap;
+}
+
+.site-header {
+
 }
 
 .site-content {
@@ -108,24 +113,21 @@
     @apply w-full;
     @apply flex;
     @apply flex-wrap;
-    @apply justify-center;
     @apply border-2;
 }
 
 .tilelist-item-label {
     @apply p-2;
-    @apply w-full;
-    @apply flex-none;
-    @apply text-center;
+    @apply flex;
+    @apply overflow-ellipsis;
+    @apply overflow-hidden;
+    @apply items-center;
 }
 
 .tilelist-item-controls {
     @apply p-2;
-    @apply grid;
-    @apply flex-none;
-    @apply w-full;
-    @apply grid-cols-2;
-    @apply justify-items-center;
+    @apply flex;
+    @apply items-center;
 }
 
 .list-btn-edit {
@@ -135,9 +137,9 @@
 }
 
 .list-btn-delete {
-    @apply btn-gray;
-    @apply max-w-min;
-    @apply hover:bg-red-600;
+    @apply w-20;
+    @apply h-20;
+    @apply flex;
 }
 
 .list-controls {

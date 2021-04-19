@@ -10,15 +10,18 @@
     <!-- End Stylesheets -->
 </head>
 <body class="site-body">
-    <nav class="nav">
+    <header class="site-header">
         <a class="nav-title" asp-controller="Home" asp-action="Index"><i class="fas fa-mask"></i><i class="fas fa-gifts"></i></a>
         <button class="nav-burger"><i class="fas fa-bars"></i></button>
-        <ul class="nav-list">
-            <li><a class="nav-list-link" asp-controller="Users" asp-action="Index">Users</a></li>
-            <li><a class="nav-list-link" asp-controller="Groups" asp-action="Index">Groups</a></li>
-            <li><a class="nav-list-link" asp-controller="Gifts" asp-action="Index">Gifts</a></li>
-        </ul>
-    </nav>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a class="nav-list-link" asp-controller="Users" asp-action="Index">Users</a></li>
+                <li><a class="nav-list-link" asp-controller="Groups" asp-action="Index">Groups</a></li>
+                <li><a class="nav-list-link" asp-controller="Gifts" asp-action="Index">Gifts</a></li>
+            </ul>
+        </nav>
+    </header>
+    
     <div class="site-content">
         <h1 class="page-header">@ViewData["Title"]</h1>
         @RenderBody()
