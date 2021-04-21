@@ -7,3 +7,18 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 
 library.add(fas, far, fab);
 dom.watch();
+
+export function setupNavList() {
+    return {
+        toggleMenu() {
+            var navList = document.getElementById('navList');
+            if (navList) {
+                if (navList.classList.contains('hidden')) {
+                    navList.classList.remove('hidden');
+                } else {
+                    navList.classList.add('hidden');
+                }
+            }
+        }
+    }
+}

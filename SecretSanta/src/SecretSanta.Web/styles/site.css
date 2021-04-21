@@ -36,7 +36,6 @@
     @apply bg-green-600;
     @apply flex;
     @apply w-full;
-    @apply justify-between;
 }
 
 .site-content {
@@ -59,15 +58,11 @@
 /*Nav Style Section*/
 .nav {
     @apply bg-green-600;
-    @apply flex;
-    @apply w-full;
-    @apply justify-between;
 }
 
 .nav-item {
     @apply text-gray-100;
     @apply p-6;
-    @apply text-2xl;
     @apply leading-10;
 }
 
@@ -76,6 +71,7 @@
     @apply inline-block;
     @apply flex-none;
     @apply bg-red-500;
+    @apply text-2xl;
 }
 
 .nav-burger {
@@ -87,11 +83,11 @@
 }
 
 .nav-list {
+    @apply flex;
     @apply justify-end;
-    @apply hidden;
+    @apply flex-col;
     @apply w-full;
-    @apply sm:visible;
-    @apply sm:inline-flex;
+    @apply sm:flex-row;
 }
 
 .nav-list-link {

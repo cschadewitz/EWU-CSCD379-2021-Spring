@@ -10,12 +10,12 @@
     {
         <div class="tilelist-item">
             <div class="tilelist-item-label">
-                <a class="" asp-action="Edit" asp-route-id=@counter>
+                <a class="" asp-action="Edit" asp-route-id=@giftViewModel.Id>
                     @giftViewModel.Title
                 </a>
             </div>
             <div class="tilelist-item-controls">
-                <form class="list-btn-delete" asp-action="Delete" asp-route-id=@counter method="post">
+                <form class="list-btn-delete" asp-action="Delete" asp-route-id=@giftViewModel.Id method="post">
                     <button onclick="return confirm('Are you sure you would like to delete @giftViewModel.Title ?')">
                         <i class="fas fa-trash-alt"></i>
                     </button>

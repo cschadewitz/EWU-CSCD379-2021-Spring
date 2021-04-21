@@ -10,10 +10,12 @@
     <!-- End Stylesheets -->
 </head>
 <body class="site-body">
-    <header class="site-header">
-        <a class="nav-title" asp-controller="Home" asp-action="Index"><i class="fas fa-mask"></i><i class="fas fa-gifts"></i></a>
-        <button class="nav-burger"><i class="fas fa-bars"></i></button>
-        <nav class="nav">
+    <header class="site-header" x-data="SecretSanta.setupNavList()">
+        <div class="flex flex-row justify-between">
+            <a class="nav-title" asp-controller="Home" asp-action="Index">Secret Santa</i></a>
+            <button class="nav-burger" @@click="toggleMenu()"><i class="fas fa-bars"></i></button>
+        </div>
+        <nav id="navList"class="nav hidden sm:inline-block">
             <ul class="nav-list">
                 <li><a class="nav-list-link" asp-controller="Users" asp-action="Index">Users</a></li>
                 <li><a class="nav-list-link" asp-controller="Groups" asp-action="Index">Groups</a></li>
