@@ -33,7 +33,10 @@
 }
 
 .site-header {
-
+    @apply bg-green-600;
+    @apply flex;
+    @apply w-full;
+    @apply justify-between;
 }
 
 .site-content {
