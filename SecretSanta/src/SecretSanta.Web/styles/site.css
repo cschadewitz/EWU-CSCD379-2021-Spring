@@ -35,7 +35,10 @@
 .site-header {
     @apply bg-green-600;
     @apply flex;
+    @apply flex-col; 
+    @apply sm:flex-row; 
     @apply w-full;
+    @apply justify-between;
 }
 
 .site-content {
