@@ -19,6 +19,7 @@ namespace SecretSanta.Api.Controllers
         {
             UserRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
+
         // GET: /api/users/
         [HttpGet]
         public IEnumerable<User> Get()
@@ -38,18 +39,20 @@ namespace SecretSanta.Api.Controllers
 
         // POST: /api/users/
         [HttpPost]
-        public ActionResult Post([FromBody] User? user)
+        public ActionResult<User?> Create([FromBody] User? user)
         {
             if (user is null)
-                return BadRequest();
+                return BadRequest(user);
             UserRepository.Create(user);
-            return Ok();
+            return user;
         }
 
         // PUT: /api/users/{id}
         [HttpPut("{id}")]
-        public ActionResult Edit(int id, [FromBody]User editedUser)
+        public ActionResult<User?> Edit(int id, [FromBody]User? editedUser)
         {
+            if (editedUser is null)
+                return BadRequest();
             User? user = UserRepository.GetItem(id);
             if (user is null)
                 return NotFound();
@@ -59,7 +62,7 @@ namespace SecretSanta.Api.Controllers
                 user.LastName = editedUser.LastName;
             }
             UserRepository.Save(user);
-            return Ok();
+            return user;
         }
 
         // DELETE: /api/users/{id}
