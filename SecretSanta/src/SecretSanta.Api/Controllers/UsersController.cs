@@ -51,16 +51,13 @@ namespace SecretSanta.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<User?> Edit(int id, [FromBody]User? editedUser)
         {
-            if (editedUser is null)
+            if (editedUser is null || string.IsNullOrWhiteSpace(editedUser.FirstName) || string.IsNullOrWhiteSpace(editedUser.LastName))
                 return BadRequest();
             User? user = UserRepository.GetItem(id);
             if (user is null)
                 return NotFound();
-            if (!string.IsNullOrWhiteSpace(editedUser.FirstName) && !string.IsNullOrWhiteSpace(editedUser.LastName))
-            {
-                user.FirstName = editedUser.FirstName;
-                user.LastName = editedUser.LastName;
-            }
+            user.FirstName = editedUser.FirstName;
+            user.LastName = editedUser.LastName;
             UserRepository.Save(user);
             return user;
         }

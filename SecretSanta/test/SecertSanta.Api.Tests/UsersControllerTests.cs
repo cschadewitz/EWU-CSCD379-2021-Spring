@@ -15,7 +15,8 @@ namespace SecertSanta.Api.Tests.Controllers
     {
 
         Mock<IUserRepository> mockUserRepository = new Mock<IUserRepository>();
-        Mock<User> mockUser = new Mock<User>();
+        Mock<User> mockValidUser = new Mock<User>();
+        Mock<User> mockInvalidUser = new Mock<User>();
 
         [TestMethod]
         public void Constructor_WithNullUserRepository_ThrowsArgumentNullException()
@@ -94,12 +95,12 @@ namespace SecertSanta.Api.Tests.Controllers
             MockSetup();
             UsersController controller = new(mockUserRepository.Object);
             //Act
-            ActionResult<User?> result = controller.Create(mockUser.Object);
+            ActionResult<User?> result = controller.Create(mockValidUser.Object);
             //Assert
             Assert.IsNotNull(result.Value);
-            Assert.AreEqual(result.Value.Id, mockUser.Object.Id);
-            Assert.AreEqual(result.Value.FirstName, mockUser.Object.FirstName);
-            Assert.AreEqual(result.Value.LastName, mockUser.Object.LastName);
+            Assert.AreEqual(result.Value.Id, mockValidUser.Object.Id);
+            Assert.AreEqual(result.Value.FirstName, mockValidUser.Object.FirstName);
+            Assert.AreEqual(result.Value.LastName, mockValidUser.Object.LastName);
         }
 
         [TestMethod]
@@ -127,6 +128,19 @@ namespace SecertSanta.Api.Tests.Controllers
         }
 
         [TestMethod]
+        public void Edit_WithExistingIdAndInvalidEditedUser_ReturnBadRequest()
+        {
+
+            //Arrange
+            MockSetup();
+            UsersController controller = new(mockUserRepository.Object);
+            //Act
+            ActionResult<User?> result = controller.Edit(0, mockInvalidUser.Object);
+            //Assert
+            Assert.IsTrue(result.Result is BadRequestResult);
+        }
+
+        [TestMethod]
         public void Edit_WithNonExistantIdAndUser_ReturnsNotFound()
         {
 
@@ -134,7 +148,7 @@ namespace SecertSanta.Api.Tests.Controllers
             MockSetup();
             UsersController controller = new(mockUserRepository.Object);
             //Act
-            ActionResult<User?> result = controller.Edit(-1, mockUser.Object);
+            ActionResult<User?> result = controller.Edit(-1, mockValidUser.Object);
             //Assert
             Assert.IsTrue(result.Result is NotFoundResult);
         }
@@ -146,11 +160,11 @@ namespace SecertSanta.Api.Tests.Controllers
             MockSetup();
             UsersController controller = new(mockUserRepository.Object);
             //Act
-            ActionResult<User?> result = controller.Edit(0, mockUser.Object);
+            ActionResult<User?> result = controller.Edit(0, mockValidUser.Object);
             //Assert
             Assert.IsNotNull(result.Value);
-            Assert.AreEqual(result.Value.FirstName, mockUser.Object.FirstName);
-            Assert.AreEqual(result.Value.LastName, mockUser.Object.LastName);
+            Assert.AreEqual(result.Value.FirstName, mockValidUser.Object.FirstName);
+            Assert.AreEqual(result.Value.LastName, mockValidUser.Object.LastName);
         }
 
         [TestMethod]
@@ -207,9 +221,12 @@ namespace SecertSanta.Api.Tests.Controllers
             });
             mockUserRepository.Setup(r => r.Save(It.IsAny<User>())).Callback<User>(u => mockData[u.Id] = u);
 
-            mockUser.SetupGet(p => p.Id).Returns(5);
-            mockUser.SetupGet(p => p.FirstName).Returns("That One");
-            mockUser.SetupGet(p => p.LastName).Returns("Guy");
+            mockValidUser.SetupGet(p => p.Id).Returns(5);
+            mockValidUser.SetupGet(p => p.FirstName).Returns("That One");
+            mockValidUser.SetupGet(p => p.LastName).Returns("Guy");
+
+            mockInvalidUser.SetupGet(p => p.Id).Returns(5);
+            mockInvalidUser.SetupGet(p => p.FirstName).Returns("That Other");
         }
         private void MockSetupEmpty()
         {
