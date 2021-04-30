@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SecretSanta.Business;
+using AutoMapper;
 
 namespace SecretSanta.Api
 {
@@ -14,6 +15,8 @@ namespace SecretSanta.Api
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddControllers();
+            services.AddAutoMapper(typeof(MappingProfile));
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

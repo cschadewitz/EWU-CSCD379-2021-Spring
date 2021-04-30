@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SecretSanta.Web.Api;
 using SecretSanta.Web.Data;
 using SecretSanta.Web.ViewModels;
 
@@ -6,9 +11,17 @@ namespace SecretSanta.Web.Controllers
 {
     public class UsersController : Controller
     {
-        public IActionResult Index()
+        public UsersClient Client { get; }
+        public IMapper Mapper { get; }
+        public UsersController(UsersClient client, IMapper mapper)
         {
-            return View(MockData.Users);
+            Client = client ?? throw new ArgumentNullException(nameof(client));
+            Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+        public async Task<IActionResult> Index()
+        {
+            ICollection<UserDTO> users = await Client.GetAllAsync();
+            return View(Mapper.Map<ICollection<UserDTO>, ICollection<UserViewModel>>(users));
         }
 
         public IActionResult Create()
@@ -17,28 +30,29 @@ namespace SecretSanta.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(UserViewModel viewModel)
+        public async Task<IActionResult> Create(UserViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                MockData.Users.Add(viewModel);
+                UserDTO user = await Client.PostAsync(Mapper.Map<UserViewModel, UserDTO>(viewModel));
                 return RedirectToAction(nameof(Index));
             }
 
             return View(viewModel);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View(MockData.Users[id]);
+            UserDTO user = await Client.GetAsync(id);
+            return View(Mapper.Map<UserDTO, UserViewModel>(user));
         }
 
         [HttpPost]
-        public IActionResult Edit(UserViewModel viewModel)
+        public async Task<IActionResult> Edit(UserViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                MockData.Users[viewModel.Id] = viewModel;
+                await Client.PutAsync(viewModel.Id, Mapper.Map<UserViewModel, UserDTO>(viewModel));
                 return RedirectToAction(nameof(Index));
             }
 
@@ -46,9 +60,9 @@ namespace SecretSanta.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            MockData.Users.RemoveAt(id);
+            await Client.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

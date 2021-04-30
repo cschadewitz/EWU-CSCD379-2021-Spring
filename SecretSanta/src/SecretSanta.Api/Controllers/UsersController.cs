@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SecretSanta.Api.DTO;
 using SecretSanta.Business;
 using SecretSanta.Data;
 
@@ -12,27 +14,35 @@ namespace SecretSanta.Api.Controllers
     public class UsersController : ControllerBase
     {
         private IUserRepository Repository { get; }
+        private IMapper Mapper { get; }
 
-        public UsersController(IUserRepository repository)
+        public UsersController(IUserRepository repository, IMapper mapper)
         {
             Repository = repository ?? throw new System.ArgumentNullException(nameof(repository));
+            Mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
-        public IEnumerable<User> Get()
+        [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]
+        public IEnumerable<UserDTO> Get()
         {
-            return Repository.List();
+            return Mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(Repository.List());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<User?> Get(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+        public ActionResult<UserDTO?> Get(int id)
         {
             User? user = Repository.GetItem(id);
-            if (user is null) return NotFound();
-            return user;
+            if (user is null) 
+                return NotFound();
+            return Mapper.Map<User, UserDTO>(user);
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult Delete(int id)
         {
             if (Repository.Remove(id))
@@ -43,17 +53,22 @@ namespace SecretSanta.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<User?> Post([FromBody] User? user)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+        public ActionResult<UserDTO?> Post([FromBody] UserDTO? user)
         {
             if (user is null)
             {
                 return BadRequest();
             }
-            return Repository.Create(user);
+            return Mapper.Map<User, UserDTO>(Repository.Create(Mapper.Map<UserDTO, User>(user)));
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] User? user)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult Put(int id, [FromBody] UserDTO? user)
         {
             if (user is null)
             {
