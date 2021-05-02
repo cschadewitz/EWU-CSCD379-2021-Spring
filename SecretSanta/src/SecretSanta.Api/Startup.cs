@@ -15,7 +15,7 @@ namespace SecretSanta.Api
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddControllers();
-            services.AddAutoMapper(typeof(MappingProfile));
+            services.AddAutoMapper(typeof(MappingProfileApi));
             services.AddSwaggerDocument();
         }
 

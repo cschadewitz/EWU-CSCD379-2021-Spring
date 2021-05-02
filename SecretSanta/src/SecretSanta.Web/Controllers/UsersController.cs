@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SecretSanta.Web.Api;
-using SecretSanta.Web.Data;
 using SecretSanta.Web.ViewModels;
 
 namespace SecretSanta.Web.Controllers
@@ -21,7 +20,8 @@ namespace SecretSanta.Web.Controllers
         public async Task<IActionResult> Index()
         {
             ICollection<UserDTO> users = await Client.GetAllAsync();
-            return View(Mapper.Map<ICollection<UserDTO>, ICollection<UserViewModel>>(users));
+            ICollection<UserViewModel> userViewModels = Mapper.Map<ICollection<UserDTO>, ICollection<UserViewModel>>(users);
+            return View(userViewModels);
         }
 
         public IActionResult Create()
@@ -44,7 +44,8 @@ namespace SecretSanta.Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             UserDTO user = await Client.GetAsync(id);
-            return View(Mapper.Map<UserDTO, UserViewModel>(user));
+            UserViewModel userViewModel = Mapper.Map<UserDTO, UserViewModel>(user);
+            return View(userViewModel);
         }
 
         [HttpPost]

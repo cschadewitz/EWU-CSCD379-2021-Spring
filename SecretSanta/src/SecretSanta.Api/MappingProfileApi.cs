@@ -4,9 +4,9 @@ using SecretSanta.Api.DTO;
 
 namespace SecretSanta.Api
 {
-    public class MappingProfile : Profile
+    public class MappingProfileApi : Profile
     {
-        public MappingProfile()
+        public MappingProfileApi()
         {
             CreateMap<UserDTO, User>();
             CreateMap<User, UserDTO>();
