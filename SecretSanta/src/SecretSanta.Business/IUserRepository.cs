@@ -3,7 +3,7 @@ using SecretSanta.Data;
 
 namespace SecretSanta.Business
 {
-    public interface IUserRepository
+    public interface IUserRepository : IEntityRepository
     {
         ICollection<User> List();
         User? GetItem(int id);
