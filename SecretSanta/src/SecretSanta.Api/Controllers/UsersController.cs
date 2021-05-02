@@ -15,9 +15,9 @@ namespace SecretSanta.Api.Controllers
         private IUserRepository Repository { get; }
         private IMapper Mapper { get; }
 
-        public UsersController(IUserRepository repository, IMapper mapper)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            Repository = repository ?? throw new System.ArgumentNullException(nameof(repository));
+            Repository = userRepository ?? throw new System.ArgumentNullException(nameof(userRepository));
             Mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
         }
 
