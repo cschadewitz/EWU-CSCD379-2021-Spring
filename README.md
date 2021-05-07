@@ -1,9 +1,11 @@
 ﻿
 # Assignment 6
 
-## Overview
+## Status Overview
 
-In this project, we are going to configure continuous integration and continuous deployment.
+[![Assignment Build And Test](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml)
+
+[![Build and deploy ASP.Net Core app to Azure Web App - SecretSantaCasey](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/Assignment6_SecretSantaCasey.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/Assignment6_SecretSantaCasey.yml)
 
 ## Assignment
 
