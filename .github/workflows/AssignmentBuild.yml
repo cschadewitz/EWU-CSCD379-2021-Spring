@@ -40,6 +40,4 @@ jobs:
     - name: Verify Build Badge
       shell: pwsh
       run: |
-        echo "This is a test"
-        Write-Host "This is another test"
         Get-Item "${{env.DOTNET_ROOT}}" README.md
