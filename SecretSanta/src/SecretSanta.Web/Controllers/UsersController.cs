@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SecretSanta.Data;
 using SecretSanta.Web.Api;
 using SecretSanta.Web.ViewModels;
 
@@ -10,15 +11,16 @@ namespace SecretSanta.Web.Controllers
 {
     public class UsersController : Controller
     {
-        public UsersClient Client { get; }
+        public IUsersClient Client { get; }
         public IMapper Mapper { get; }
-        public UsersController(UsersClient client, IMapper mapper)
+        public UsersController(IUsersClient usersClient, IMapper mapper)
         {
-            Client = client ?? throw new ArgumentNullException(nameof(client));
+            Client = usersClient ?? throw new ArgumentNullException(nameof(usersClient));
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            
         }
         public async Task<IActionResult> Index()
-        {
+        {            
             ICollection<UserDTO> users = await Client.GetAllAsync();
             ICollection<UserViewModel> userViewModels = Mapper.Map<ICollection<UserDTO>, ICollection<UserViewModel>>(users);
             return View(userViewModels);
@@ -60,7 +62,7 @@ namespace SecretSanta.Web.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
             await Client.DeleteAsync(id);

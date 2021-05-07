@@ -6,9 +6,6 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SecretSanta.Api.Controllers;
@@ -19,7 +16,7 @@ using SecretSanta.Data;
 namespace SecretSanta.Api.Tests.Controllers
 {
     [TestClass]
-    public class UserControllerTests
+    public class UsersControllerTests
     {
         WebApplicationFactory Factory;
         HttpClient Client;
@@ -40,7 +37,7 @@ namespace SecretSanta.Api.Tests.Controllers
 
         private void ConfigureMocks()
         {
-            User mockUser = new User { Id = 1, FirstName = "test", LastName = "user" };
+            User mockUser = new User { Id = 1, FirstName = "Test", LastName = "User" };
             List<User> mockUsers = new List<User>
             {
                 mockUser

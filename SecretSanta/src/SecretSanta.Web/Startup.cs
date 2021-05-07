@@ -25,16 +25,15 @@ namespace SecretSanta.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<UsersClient>(_ => new UsersClient(ApiClient));
-            //var configuration = new MapperConfiguration(cfg =>
-            //{
-            //    cfg.AddProfile<MappingProfileWeb>();
-            //    //cfg.CreateMap<UserDTO, UserViewModel>();
-            //    //cfg.CreateMap<UserViewModel, UserDTO>();
-            //
-            //});
-            //configuration.AssertConfigurationIsValid();
-            services.AddAutoMapper(typeof(MappingProfileWeb));
+            services.AddScoped<IUsersClient>(_ => new UsersClient(ApiClient));
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserDTO, UserViewModel>();
+                cfg.CreateMap<UserViewModel, UserDTO>();
+            });
+            configuration.AssertConfigurationIsValid();
+            configuration.CompileMappings();
+            services.AddSingleton<IMapper>(new Mapper(configuration));
             services.AddControllersWithViews();
         }
 

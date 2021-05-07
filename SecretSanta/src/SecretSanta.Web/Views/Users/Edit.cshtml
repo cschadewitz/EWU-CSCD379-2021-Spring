@@ -1,4 +1,7 @@
 @model UserViewModel
+@{
+    ViewData["Title"] = "Users - Edit";
+}
 
 <form asp-controller="Users" asp-action="Edit" method="post">
     <input type="hidden" asp-for="Id" />
