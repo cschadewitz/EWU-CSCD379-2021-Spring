@@ -36,8 +36,3 @@ jobs:
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      
-    - name: Verify Build Badge
-      shell: pwsh
-      run: |
-        Get-Item "${{env.DOTNET_ROOT}}" README.md
