@@ -50,7 +50,7 @@ jobs:
       shell: pwsh
       run: |
         [bool]$buildBadgeExists=$false
-        Get-Item ./README.md | Get-Content | Where-Object { $_ -like "*badge.svg*"} | Foreach-Object { $buildBadgeExists = $true; break }
+        Get-Item ./README.md | Get-Content | Where-Object { $_ -like "*AssignmentBuild.yml/badge.svg*"} | Foreach-Object { $buildBadgeExists = $true; break }
         if(-not $buildBadgeExists) {
           throw "Build Badge does not exist in README.md"
         }
