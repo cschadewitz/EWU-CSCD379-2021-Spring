@@ -30,20 +30,31 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Build
+    - name: Build Web
       run: dotnet build --no-restore
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
-    - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+    - name: dotnet publish API
+      run: dotnet publish ./SecretSanta/src/SecretSanta.Api/ -c Release -o ${{env.DOTNET_ROOT}}/API
+
+    - name: dotnet publish Web
+      run: dotnet publish ./SecretSanta/src/SecretSanta.Web/ -c Release -o ${{env.DOTNET_ROOT}}/Web
+
+
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
-        name: .net-app
-        path: ${{env.DOTNET_ROOT}}/myapp
+        name: .net-app_API
+        path: ${{env.DOTNET_ROOT}}/API
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
+      with:
+        name: .net-app_Web
+        path: ${{env.DOTNET_ROOT}}/Web
 
     - name: Display Directory Structure
       run: ls -R
