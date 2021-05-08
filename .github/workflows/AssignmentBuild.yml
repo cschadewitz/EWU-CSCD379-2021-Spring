@@ -37,20 +37,20 @@ jobs:
       run: dotnet test --no-build --verbosity normal
 
     - name: dotnet publish API
-      run: dotnet publish ~/SecretSanta/src/SecretSanta.Api/SecretSanta.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/API
+      run: dotnet publish ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/src/SecretSanta.Api/SecretSanta.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/API
 
     - name: dotnet publish Web
-      run: dotnet publish ~/SecretSanta/src/SecretSanta.Web/SecretSanta.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/Web
+      run: dotnet publish ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/src/SecretSanta.Web/SecretSanta.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/Web
 
 
 
-    - name: Upload artifact for deployment job
+    - name: Upload API artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
         name: .net-app_API
         path: ${{env.DOTNET_ROOT}}/API
 
-    - name: Upload artifact for deployment job
+    - name: Upload Web artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
         name: .net-app_Web
