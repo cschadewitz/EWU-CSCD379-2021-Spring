@@ -44,6 +44,9 @@ jobs:
       with:
         name: .net-app
         path: ${{env.DOTNET_ROOT}}/myapp
+
+    - name: Display Directory Structure
+      run: ls -R
       
     - name: Verify Build Badge
       working-directory: ./
