@@ -3,9 +3,9 @@
 
 ## Status Overview
 
-[![Assignment Build And Test](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml)
+[![Build And Test](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml)
 
-[![Build and deploy to Azure](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/Assignment6_SecretSantaCasey.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/Assignment6_SecretSantaCasey.yml)
+[![Deploy](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml)
 
 ## Assignment
 

@@ -6,8 +6,7 @@ name: Deployed
 on:
   workflow_run:
     workflows: ["Build And Test"]
-    types:
-    - completed
+    types: [completed]
   workflow_dispatch:
 
 jobs:
