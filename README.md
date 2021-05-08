@@ -1,51 +1,28 @@
-Please feel free to submit updates.
+﻿
+# Assignment 6
 
-## Instructors ##
-[Mark Michaelis](https://github.com/MarkMichaelis), [Kevin Bost](https://github.com/Keboo), and [Michael Stokesbary](https://github.com/breaman)
+## Status Overview
 
-For any general question we suggest asking in Teams so that others can help as well. We encourage people to work together and collaborate. Please feel free to help your fellow students out. Though it is possible to privately message people directly, as much as possible, we encourage open discussion on the main chat so that others can benefit as well.
+[![Build And Test](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml)
 
-You can also send an e-mail to: EWU-Instructors@IntelliTect.com
+[![Deploy](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml)
 
-## Online Meeting
-We will be utilizing Microsoft Teams for this class. The link to the meeting will be in the course syllabus on Canvas. You can find additional information for accessing Teams [here](Docs/MicrosoftTeams.md)
+## Assignment
 
-## GitHub Information
-In order to properly grade assignments, we need to be able to link your GitHub ID with your name in Canvas. Within Teams there is a Files tab, that contains a GitHubUserNames.xlsx spreadsheet. Please add you GitHub ID and name to this spread sheet so we can properly assign grades. 
+- Configure a CI Build against the SecretSanta solution
+  - Compile all the source code ✔❌
+  - Run all the user tests ✔❌
+  - Add the Build Status to the Read.me file of your project.  (Be sure to use relative links so it works across branches and even when forked.) ✔❌
+  - Place a URL to your fork and branch in your readme (so that we can easily navigate there to see the build)
+- Configure a CD deployment of the project (https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions)
+  - Configure an Azure Web App (using the Azure Portal) ✔❌
+  - Configure a GitHub Action to deploy to an Azure Web App (https://github.com/Azure/webapps-deploy) ✔❌
+  - Add the Deploy Status to the Read.me file of your project.  (Be sure to use relative links so it works across branches and even when forked.) ✔❌
+  - Be sure to deploy the API project and verify that the UI that calls the API project works correctly. This will require you to update the URL/address in the Web project that points to the API project. ✔❌
+- Place a hyperlink to the running website in both your Readme and your PR. (Consider using a badge that shows whether the site is up or not.) ✔❌
 
-## Book
-Though there is no required course book for this class. Much of the C# related topics that we will use are covered in this this book:
+## Extra Credit
 
-Essential C# 8.0 (7th Edition)  
-ISBN-13: 9780135972267
-
-Code for the Book: https://github.com/IntelliTect/EssentialCSharp
-
-## General Information:
-* [Submit Student Information](https://docs.google.com/forms/d/e/1FAIpQLScCTQgRTQDBa4aiaDXj9HPferL7WuL8LoKx8sDaBHwM-a_F8Q/viewform) Google form so we can properly grade assignments and add you to Microsoft Teams.
-* [**Homework/Grading**](Docs/Homework.md)
-* **Office Hours**: Office hours are available before class on Tuesday's and Thursdays starting at 1 PM.  To ensure that an instructor will be available, please schedule an appointment 24-hours beforehand by sending a meeting request email to EWU-Instructors@IntelliTect.com.  Alternative times may be available upon request.
-
-## Computer Setup ##
-
-### Required ###
-- [.NET 5.0](https://dotnet.microsoft.com/download)
-
-Though most of the course work will be cross platform, we will be working on Windows inside of Visual Studio. For the UI portion of the class Visual Studio on Windows will be required. 
-
-### Recommended ###
-- [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/). Version 16.8 or later. The community edition is fine, though we believe most students should have access to higher SKUs with EWU's MSDN (this assumption may be wrong). Lab computers should have Professional already installed.
-- [Visual Studio Code](https://code.visualstudio.com/) This lightweight editor has several plugins that can make web development much easier. Many of us also use it as our catch-all lightweight text/code editor.
-- [Git Kraken](https://www.gitkraken.com/) Though you can do all of the git interaction from within Visual Studio/Visual Studio Code, or on the command line, GitKraken is free for open source work. It also provides a nice graphical version of the commit history so you can see how various commits and branches relate.
-- [GitHub Student Developer Pack](https://education.github.com/students) Lots of great development tools and resources. The JetBrains products ReSharper (a plugin for Visual Studio), and Rider (a full C# IDE) are great tools for helping you write better code. 
-
-### Optional ###
-- [Visual Studio Live Share](https://visualstudio.microsoft.com/services/live-share/) This lets you easily collaborate with other people on a share set of code. 
-- [GitExtensions](https://gitextensions.github.io/), [GitHub Desktop](https://desktop.github.com/), (or any other git tool): There are lots of options out there for working with git. If there is a tool you like, use it! 
-
-## Class Video ##
-We will try to record class presentations so that students can review after class. If successful, the recordings will be available here: [RECORDINGS](https://www.dropbox.com/sh/96gbcsqfqb9nghx/AAA6KMSJBceSoO_R8d8fJTnda?dl=0).
-
-Please note:
-* **Do not expect or rely on video recordings.**  We are not making any commitment to having video recordings of class. 
-* Please keep all videos ***confidential***. These videos are for people enrolled in this class.  No videos or parts of videos should be distributed or shared with those outside of the class.
+- Have the Web Tests run against the deployed website after the deployment completes.
+- Configure the API site URL address into the Web Project during the deployment using a GitHub Action variable.
+- Configure code coverage and generate a report (see https://github.com/dotnet/docs/blob/main/docs/core/testing/unit-testing-code-coverage.md) ✔❌

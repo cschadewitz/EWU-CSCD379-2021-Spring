@@ -1,0 +1,9 @@
+@model GroupViewModel
+
+<div class="grid grid-cols-1 mb-6">
+    <div>
+        <label class="text-gray-500 font-bold text-right" asp-for="Name"></label>
+        <input class="w-full border-b-2 border-green-300 focus:border-green-600 focus:ring-transparent focus:outline-none" type="text" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+</div>
