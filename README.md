@@ -5,7 +5,7 @@
 
 [![Build And Test](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml)
 
-[![Deploy](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml/badge.svg?branch=Assignment6)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml)
+[![Deploy](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml/badge.svg?branch=main)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml)
 
 ## Assignment
 
