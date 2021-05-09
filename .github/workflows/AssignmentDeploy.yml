@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deployWeb:
     runs-on: windows-latest
     environment:
       name: 'production'
@@ -35,6 +35,22 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_db3e9b66f86c432a91f76cda3dd8b0c0 }}
         package: ./.net-app_Web 
+
+  deployApi:
+    runs-on: windows-latest
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: AssignmentBuild.yml
+        workflow_conclusion: success
+
+    - name: Get Directory Contents
+      run: ls
 
     - name: Deploy to Azure API App
       id: deploy-to-webapp
