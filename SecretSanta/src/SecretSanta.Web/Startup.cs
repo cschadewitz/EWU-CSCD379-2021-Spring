@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SecretSanta.Web.Api;
@@ -10,10 +11,15 @@ namespace SecretSanta.Web
 {
     public class Startup
     {
-        private static HttpClient UsersHttpClient { get; } = new()
+        private static HttpClient UsersHttpClient { get; } = new();
+
+        private IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration, IHostEnvironment env)
         {
-            BaseAddress = new Uri("https://secretsantacasey-api.azurewebsites.net")
-        };
+            Configuration = configuration;
+            UsersHttpClient.BaseAddress = new Uri(Configuration.GetValue<string>("ApiUrl"));
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
