@@ -27,6 +27,12 @@ jobs:
     - name: Get Directory Contents
       run: ls
 
+    - uses: microsoft/variable-substitution@v1 
+    with:
+        files: './.net-app_Web/appsettings.json'
+    env:
+        ApiUrl: 'https://secretsantacasey-api.azurewebsites.net'
+
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
