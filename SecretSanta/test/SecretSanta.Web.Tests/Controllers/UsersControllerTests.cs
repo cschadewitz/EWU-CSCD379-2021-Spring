@@ -10,7 +10,7 @@ using SecretSanta.Web.ViewModels;
 namespace SecretSanta.Web.Tests.Controllers
 {
     [TestClass]
-    public class UsersControllersTests
+    public class UsersControllerTests
     {
         [TestMethod]
         public void Constructor_WithNullRepository_ThrowException()
