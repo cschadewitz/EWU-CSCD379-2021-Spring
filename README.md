@@ -7,6 +7,10 @@
 
 [![Deploy](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml/badge.svg)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentDeploy.yml)
 
+[![Website secretsantacasey.azurewebsites.net](https://img.shields.io/website-up-down-green-red/https/secretsantacasey.azurewebsites.net.svg)](https://secretsantacasey.azurewebsites.net)
+
+[![Swagger Docs](https://img.shields.io/badge/Swagger-docs-1abc9c.svg)](https://secretsantacasey-api.azurewebsites.net/swagger/index.html)
+
 ## Assignment
 
 - Configure a CI Build against the SecretSanta solution
