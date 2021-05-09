@@ -5,21 +5,14 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using SecretSanta.Web;
 using SecretSanta.Web.Api;
-using SecretSanta.Web.Tests.Api;
 
-namespace SecretSanta.Web.Tests
+namespace SecretSanta.Web.SystemTests
 {
     internal class WebApplicationFactory : WebApplicationFactory<Startup>
     {
-        internal TestableUsersClient Client { get; } = new();
-
+        public IUsersClient Client { get; set; }
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.ConfigureServices(services => {
-                services.AddScoped<IUsersClient, TestableUsersClient>(_ => Client);
-            });
-
-            //builder.Configure(app => { app.UseRouting(); app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); }); });
         }
     }
 }

@@ -1,0 +1,38 @@
+name: System Tests
+
+on:
+  workflow_run:
+    workflows: ["Deploy"]
+    types: [completed]
+  workflow_dispatch:
+
+jobs:
+  test:
+    defaults:
+      run:
+        working-directory: ./SecretSanta/
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        
+    - name: Get Directory
+      run: pwd
+
+    - name: Run Npm Build
+      working-directory: ./SecretSanta/src/SecretSanta.Web/
+      run: |
+        npm install
+        npm run build:prod
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Web Functional Tests
+      run: dotnet test ./test/SecretSanta.Web.SystemTests/SecretSanta.Web.SystemTests.csproj --no-build --verbosity normal

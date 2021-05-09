@@ -1,5 +1,7 @@
 @model UserViewModel
-
+@{
+    ViewData["Title"] = "Users - Create";
+}
 <form asp-controller="Users" asp-action="Create" method="post">
     @await Html.PartialAsync("_CreateOrEdit")
     <button class="border-2 bg-green-400 border-green-800 hover:bg-green-600 py-2 px-4 rounded-xl mr-3">Create</button>
