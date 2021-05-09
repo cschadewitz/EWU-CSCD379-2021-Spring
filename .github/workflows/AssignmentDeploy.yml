@@ -36,7 +36,7 @@ jobs:
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_db3e9b66f86c432a91f76cda3dd8b0c0 }}
         package: ./.net-app_Web 
 
-    - name: Deploy to Azure Web App
+    - name: Deploy to Azure API App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
