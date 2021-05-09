@@ -24,6 +24,9 @@ jobs:
         workflow: AssignmentBuild.yml
         workflow_conclusion: success
 
+    - name: Get Directory Contents
+      run: ls
+
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
@@ -31,4 +34,13 @@ jobs:
         app-name: 'SecretSantaCasey'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_db3e9b66f86c432a91f76cda3dd8b0c0 }}
-        package: .
+        package: ./.net-app_Web 
+
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'SecretSantaCasey-API'
+        slot-name: 'production'
+        publish-profile: ${{ AZUREAPPSERVICE_PUBLISHPROFILE_47FD552DE7A94D4A9548094B1170CC70 }}
+        package: ./.net-app_API 
