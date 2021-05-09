@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        
     - name: Get Directory
       run: pwd
 
@@ -33,8 +34,8 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Api Unit Tests
+      run: dotnet test ./test/SecretSanta.Api.Tests/SecretSanta.Api.Tests.csproj --no-build --verbosity normal
 
     - name: dotnet publish API
       run: dotnet publish ./src/SecretSanta.Api/SecretSanta.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/API
