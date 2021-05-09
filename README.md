@@ -1,4 +1,3 @@
-﻿
 # Assignment 6
 
 ## Status Overview
@@ -9,7 +8,7 @@
 
 [![Website secretsantacasey.azurewebsites.net](https://img.shields.io/website-up-down-green-red/https/secretsantacasey.azurewebsites.net.svg)](https://secretsantacasey.azurewebsites.net)
 
-[![Swagger Docs](https://img.shields.io/badge/Swagger-docs-1abc9c.svg)](https://secretsantacasey-api.azurewebsites.net/swagger/index.html)
+[![Swagger Docs](https://img.shields.io/badge/Swagger-API-1abc9c.svg)](https://secretsantacasey-api.azurewebsites.net/swagger/index.html)
 
 ## Assignment
 
