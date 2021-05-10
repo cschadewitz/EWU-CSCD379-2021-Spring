@@ -43,12 +43,12 @@ jobs:
     - name: Run Coverage Report Generator for Api
       run: |
         cd ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Api.Tests/TestResults/*/
-        reportgenerator "-reports:.\coverage.cobertura.xml" "-targetdir:/home/runner/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Api.Tests/coveragereport" -reporttypes:Html
+        reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:/home/runner/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Api.Tests/coveragereport" -reporttypes:Html
 
     - name: Run Coverage Report Generator for Web
       run: |
         cd ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Web.Tests/TestResults/*/
-        reportgenerator "-reports:.\coverage.cobertura.xml" "-targetdir:/home/runner/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Web.Tests/coveragereport" -reporttypes:Html
+        reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:/home/runner/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Web.Tests/coveragereport" -reporttypes:Html
         cd ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/
         
     - name: dotnet publish API
