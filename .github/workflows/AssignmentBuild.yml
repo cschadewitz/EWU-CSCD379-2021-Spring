@@ -11,7 +11,7 @@ jobs:
     defaults:
       run:
         working-directory: ./SecretSanta/
-    runs-on: ubuntu-latest
+    runs-on:  ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -19,9 +19,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-        
-    - name: Get Directory
-      run: pwd
 
     - name: Run Npm Build
       working-directory: ./SecretSanta/src/SecretSanta.Web/
@@ -35,18 +32,30 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Api Unit Tests
-      run: dotnet test ./test/SecretSanta.Api.Tests/SecretSanta.Api.Tests.csproj --no-build --verbosity normal
+      run: dotnet test ./test/SecretSanta.Api.Tests/SecretSanta.Api.Tests.csproj --collect:"XPlat Code Coverage"
 
     - name: Web Integration Tests
-      run: dotnet test ./test/SecretSanta.Web.Tests/SecretSanta.Web.Tests.csproj --no-build --verbosity normal
+      run: dotnet test ./test/SecretSanta.Web.Tests/SecretSanta.Web.Tests.csproj --collect:"XPlat Code Coverage"
 
+    - name: Install Coverage Report Generator
+      run: dotnet tool install -g dotnet-reportgenerator-globaltool
+      
+    - name: Run Coverage Report Generator for Api
+      run: |
+        cd ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Api.Tests/TestResults/*/
+        reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:/home/runner/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Api.Tests/coveragereport" -reporttypes:Html
+
+    - name: Run Coverage Report Generator for Web
+      run: |
+        cd ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Web.Tests/TestResults/*/
+        reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:/home/runner/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Web.Tests/coveragereport" -reporttypes:Html
+        cd ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/
+        
     - name: dotnet publish API
       run: dotnet publish ./src/SecretSanta.Api/SecretSanta.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/API
 
     - name: dotnet publish Web
       run: dotnet publish ./src/SecretSanta.Web/SecretSanta.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/Web
-
-
 
     - name: Upload API artifact for deployment job
       uses: actions/upload-artifact@v2
@@ -59,6 +68,18 @@ jobs:
       with:
         name: .net-app_Web
         path: ${{env.DOTNET_ROOT}}/Web
+
+    - name: Upload API Coverage Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: api_coverage_report
+        path: ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Api.Tests/coveragereport
+
+    - name: Upload Web Coverage Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: web_coverage_report
+        path: ~/work/EWU-CSCD379-2021-Spring/EWU-CSCD379-2021-Spring/SecretSanta/test/SecretSanta.Web.Tests/coveragereport
         
     - name: Verify Build Badge
       working-directory: ./
