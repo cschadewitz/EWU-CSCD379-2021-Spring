@@ -34,9 +34,10 @@ namespace SecretSanta.Web.Controllers
         }
 
         [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Null check is performed but not recognized by analyzer")]
         public IActionResult Edit(GroupViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && viewModel is not null)
             {
                 MockData.Groups[viewModel.Id] = viewModel;
                 return RedirectToAction(nameof(Index));

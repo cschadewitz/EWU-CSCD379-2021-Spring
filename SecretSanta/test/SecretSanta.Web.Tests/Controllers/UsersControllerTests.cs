@@ -15,7 +15,7 @@ namespace SecretSanta.Web.Tests.Controllers
         [TestMethod]
         public void Constructor_WithNullRepository_ThrowException()
         {
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => new UsersController(null!));
+            ArgumentNullException ex = Assert.ThrowsException<ArgumentNullException>(() => new UsersController(null!));
             Assert.AreEqual("userClient", ex.ParamName);
         }
 
@@ -34,7 +34,7 @@ namespace SecretSanta.Web.Tests.Controllers
 
             HttpClient client = factory.CreateClient();
 
-            HttpResponseMessage response = await client.GetAsync("/users/index");
+            HttpResponseMessage response = await client.GetAsync(new Uri("/users/index", UriKind.Relative));
 
             response.EnsureSuccessStatusCode();
             Assert.AreEqual(1, usersClient.GetAllInvocationCount);
@@ -48,18 +48,19 @@ namespace SecretSanta.Web.Tests.Controllers
 
             HttpClient client = factory.CreateClient();
 
-            var values = new Dictionary<string?, string?>
+            var values = new Dictionary<string, string>
             {
                 { nameof(UserViewModel.Id), "42" },
                 { nameof(UserViewModel.FirstName), "John" },
                 { nameof(UserViewModel.LastName), "Smith" },
             };
-            using FormUrlEncodedContent content = new(values);
+            using FormUrlEncodedContent content = new((IEnumerable<KeyValuePair<string?, string?>>)values);
 
-            HttpResponseMessage response = await client.PostAsync("/users/create", content);
+            HttpResponseMessage response = await client.PostAsync(new Uri("/users/create", UriKind.Relative), content);
 
             response.EnsureSuccessStatusCode();
             Web.Api.User? createdUser = await usersClient.GetAsync(42);
+            Assert.IsNotNull(createdUser);
             Assert.AreEqual(42, createdUser.Id);
             Assert.AreEqual("John", createdUser.FirstName);
             Assert.AreEqual("Smith", createdUser.LastName);
@@ -74,14 +75,14 @@ namespace SecretSanta.Web.Tests.Controllers
 
             HttpClient client = factory.CreateClient();
 
-            var values = new Dictionary<string?, string?>
+            var values = new Dictionary<string, string>
             {
                 { nameof(UserViewModel.Id), "42" },
                 { nameof(UserViewModel.FirstName), "" }
             };
-            using FormUrlEncodedContent content = new(values);
+            using FormUrlEncodedContent content = new((IEnumerable<KeyValuePair<string?, string?>>)values);
 
-            HttpResponseMessage response = await client.PostAsync("/users/create", content);
+            HttpResponseMessage response = await client.PostAsync(new Uri("/users/create", UriKind.Relative), content);
 
             response.EnsureSuccessStatusCode();
             Assert.AreEqual(0, usersClient.PostInvocationCount);
@@ -100,7 +101,7 @@ namespace SecretSanta.Web.Tests.Controllers
             });
             HttpClient client = factory.CreateClient();
 
-            HttpResponseMessage response = await client.GetAsync("/users/edit/42");
+            HttpResponseMessage response = await client.GetAsync(new Uri("/users/edit/42", UriKind.Relative));
 
             response.EnsureSuccessStatusCode();
             Assert.AreEqual(1, usersClient.GetInvocationCount);
@@ -119,17 +120,18 @@ namespace SecretSanta.Web.Tests.Controllers
             });
             HttpClient client = factory.CreateClient();
 
-            var values = new Dictionary<string?, string?>
+            var values = new Dictionary<string, string>
             {
                 { nameof(UserViewModel.Id), "42" },
                 { nameof(UserViewModel.FirstName), "Jane" },
                 { nameof(UserViewModel.LastName), "Doe" },
             };
-            using FormUrlEncodedContent content = new(values);
-            HttpResponseMessage response = await client.PostAsync("/users/edit", content);
+            using FormUrlEncodedContent content = new((IEnumerable<KeyValuePair<string?, string?>>)values);
+            HttpResponseMessage response = await client.PostAsync(new Uri("/users/edit", UriKind.Relative), content);
 
             response.EnsureSuccessStatusCode();
             Web.Api.User? createdUser = await usersClient.GetAsync(42);
+            Assert.IsNotNull(createdUser);
             Assert.AreEqual(42, createdUser.Id);
             Assert.AreEqual("Jane", createdUser.FirstName);
             Assert.AreEqual("Doe", createdUser.LastName);
@@ -149,13 +151,13 @@ namespace SecretSanta.Web.Tests.Controllers
             });
             HttpClient client = factory.CreateClient();
 
-            var values = new Dictionary<string?, string?>
+            var values = new Dictionary<string, string>
             {
                 { nameof(UserViewModel.Id), "42" },
                 { nameof(UserViewModel.FirstName), "" }
             };
-            using FormUrlEncodedContent content = new(values);
-            HttpResponseMessage response = await client.PostAsync("/users/edit", content);
+            using FormUrlEncodedContent content = new((IEnumerable<KeyValuePair<string?, string?>>)values);
+            HttpResponseMessage response = await client.PostAsync(new Uri("/users/edit", UriKind.Relative), content);
 
             response.EnsureSuccessStatusCode();
             Assert.AreEqual(0, usersClient.PutInvocationCount);
@@ -174,12 +176,12 @@ namespace SecretSanta.Web.Tests.Controllers
             });
             HttpClient client = factory.CreateClient();
 
-            var values = new Dictionary<string?, string?>
+            var values = new Dictionary<string, string>
             {
                 { nameof(UserViewModel.Id), "42" }
             };
-            using FormUrlEncodedContent content = new(values);
-            HttpResponseMessage response = await client.PostAsync("/users/delete", content);
+            using FormUrlEncodedContent content = new((IEnumerable<KeyValuePair<string?, string?>>)values);
+            HttpResponseMessage response = await client.PostAsync(new Uri("/users/delete", UriKind.Relative), content);
 
             response.EnsureSuccessStatusCode();
             Assert.AreEqual(1, usersClient.DeleteInvocationCount);

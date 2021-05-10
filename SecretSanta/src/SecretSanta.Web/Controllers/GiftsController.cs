@@ -19,9 +19,10 @@ namespace SecretSanta.Web.Controllers
         }
 
         [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Null check is performed but not recognized by analyzer")]
         public IActionResult Create(GiftViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && viewModel is not null)
             {
                 viewModel.Id = MockData.Gifts.Max(g => g.Id) + 1;
                 MockData.Gifts.Add(viewModel);
