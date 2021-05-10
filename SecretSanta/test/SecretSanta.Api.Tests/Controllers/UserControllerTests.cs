@@ -17,7 +17,7 @@ namespace SecretSanta.Api.Tests.Controllers
         [TestMethod]
         public void Constructor_WithNullRepository_ThrowException()
         {
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => new UsersController(null!));
+            ArgumentNullException ex = Assert.ThrowsException<ArgumentNullException>(() => new UsersController(null!));
             Assert.AreEqual("repository", ex.ParamName);
         }
 
@@ -89,7 +89,7 @@ namespace SecretSanta.Api.Tests.Controllers
             HttpClient client = factory.CreateClient();
 
             //Act
-            HttpResponseMessage response = await client.GetAsync("/api/users/41");
+            HttpResponseMessage response = await client.GetAsync(new Uri("/api/users/41", UriKind.Relative));
 
             //Assert
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
@@ -112,7 +112,7 @@ namespace SecretSanta.Api.Tests.Controllers
             HttpClient client = factory.CreateClient();
 
             //Act
-            HttpResponseMessage response = await client.DeleteAsync("/api/users/42");
+            HttpResponseMessage response = await client.DeleteAsync(new Uri("/api/users/42", UriKind.Relative));
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -136,7 +136,7 @@ namespace SecretSanta.Api.Tests.Controllers
             HttpClient client = factory.CreateClient();
 
             //Act
-            HttpResponseMessage response = await client.DeleteAsync("/api/users/41");
+            HttpResponseMessage response = await client.DeleteAsync(new Uri("/api/users/41", UriKind.Relative));
 
             //Assert
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
@@ -153,7 +153,7 @@ namespace SecretSanta.Api.Tests.Controllers
             HttpClient client = factory.CreateClient();
 
             //Act
-            HttpResponseMessage response = await client.PostAsJsonAsync("/api/users/", new Dto.User
+            HttpResponseMessage response = await client.PostAsJsonAsync(new Uri("/api/users", UriKind.Relative), new Dto.User
             {
                 Id = 42,
                 FirstName = "John",
@@ -162,7 +162,8 @@ namespace SecretSanta.Api.Tests.Controllers
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-            var createdUser = repository.GetItem(42);
+            Data.User? createdUser = repository.GetItem(42);
+            Assert.IsNotNull(createdUser);
             Assert.AreEqual(42, createdUser.Id);
             Assert.AreEqual("John", createdUser.FirstName);
             Assert.AreEqual("Smith", createdUser.LastName);
@@ -184,7 +185,7 @@ namespace SecretSanta.Api.Tests.Controllers
             HttpClient client = factory.CreateClient();
 
             //Act
-            HttpResponseMessage response = await client.PutAsJsonAsync("/api/users/42", new Dto.UpdateUser
+            HttpResponseMessage response = await client.PutAsJsonAsync(new Uri("/api/users/42", UriKind.Relative), new Dto.UpdateUser
             {
                 FirstName = "Jane",
                 LastName = "Doe"
@@ -192,7 +193,8 @@ namespace SecretSanta.Api.Tests.Controllers
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-            var createdUser = repository.GetItem(42);
+            Data.User? createdUser = repository.GetItem(42);
+            Assert.IsNotNull(createdUser);
             Assert.AreEqual(42, createdUser.Id);
             Assert.AreEqual("Jane", createdUser.FirstName);
             Assert.AreEqual("Doe", createdUser.LastName);
@@ -214,7 +216,7 @@ namespace SecretSanta.Api.Tests.Controllers
             HttpClient client = factory.CreateClient();
 
             //Act
-            HttpResponseMessage response = await client.PutAsJsonAsync("/api/users/41", new Dto.UpdateUser
+            HttpResponseMessage response = await client.PutAsJsonAsync(new Uri("/api/users/41", UriKind.Relative), new Dto.UpdateUser
             {
                 FirstName = "Jane",
                 LastName = "Doe"
@@ -222,7 +224,8 @@ namespace SecretSanta.Api.Tests.Controllers
 
             //Assert
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
-            var createdUser = repository.GetItem(42);
+            Data.User? createdUser = repository.GetItem(42);
+            Assert.IsNotNull(createdUser);
             Assert.AreEqual(42, createdUser.Id);
             Assert.AreEqual("John", createdUser.FirstName);
             Assert.AreEqual("Smith", createdUser.LastName);

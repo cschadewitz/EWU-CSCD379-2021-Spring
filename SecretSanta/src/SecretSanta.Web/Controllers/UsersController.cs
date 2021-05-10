@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace SecretSanta.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var users = await UserClient.GetAllAsync();
+            ICollection<User>? users = await UserClient.GetAllAsync();
             var userViewModels = users.Select(x => new UserViewModel
             {
                 Id = x.Id,
@@ -34,9 +35,10 @@ namespace SecretSanta.Web.Controllers
         }
 
         [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Null check is performed but not recognized by analyzer")]
         public async Task<IActionResult> Create(UserViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && viewModel is not null)
             {
                 await UserClient.PostAsync(new User
                 {
@@ -62,9 +64,10 @@ namespace SecretSanta.Web.Controllers
         }
 
         [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Null check is performed but not recognized by analyzer")]
         public async Task<IActionResult> Edit(UserViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && viewModel is not null)
             {
                 await UserClient.PutAsync(viewModel.Id, new UpdateUser
                 {

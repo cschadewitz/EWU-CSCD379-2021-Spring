@@ -55,10 +55,11 @@ namespace SecretSanta.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Null check is performed but not recognized by analyzer")]
         public ActionResult Put(int id, [FromBody] Dto.UpdateUser? user)
         {
             Data.User? foundUser = Repository.GetItem(id);
-            if (foundUser is not null)
+            if (foundUser is not null && user is not null)
             {
                 foundUser.FirstName = user.FirstName ?? "";
                 foundUser.LastName = user.LastName ?? "";
