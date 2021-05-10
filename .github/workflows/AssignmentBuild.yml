@@ -35,13 +35,19 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Api Unit Tests
-      run: dotnet test ./test/SecretSanta.Api.Tests/SecretSanta.Api.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-build --verbosity normal
+      run: dotnet test ./test/SecretSanta.Api.Tests/SecretSanta.Api.Tests.csproj --collect:"XPlat Code Coverage"
 
     - name: Web Integration Tests
-      run: dotnet test ./test/SecretSanta.Web.Tests/SecretSanta.Web.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-build --verbosity normal
+      run: dotnet test ./test/SecretSanta.Web.Tests/SecretSanta.Web.Tests.csproj --collect:"XPlat Code Coverage"
 
     - name: Install Coverage Report Generator
       run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+    - name: Run Coverage Report Generator for Api
+      run: reportgenerator "-reports:.\test\SecretSanta.Api.Tests\TestResults\*\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+
+    - name: Run Coverage Report Generator for Web
+      run: reportgenerator "-reports:.\test\SecretSanta.Web.Tests\TestResults\*\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
 
     - name: dotnet publish API
       run: dotnet publish ./src/SecretSanta.Api/SecretSanta.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/API
@@ -62,6 +68,18 @@ jobs:
       with:
         name: .net-app_Web
         path: ${{env.DOTNET_ROOT}}/Web
+
+    - name: Upload API Coverage Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: api_coverage_report
+        path: ./test/SecretSanta.Api.Tests/coveragereport
+
+    - name: Upload Web Coverage Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: web_coverage_report
+        path: ./test/SecretSanta.Web.Tests/coveragereport
         
     - name: Verify Build Badge
       working-directory: ./
