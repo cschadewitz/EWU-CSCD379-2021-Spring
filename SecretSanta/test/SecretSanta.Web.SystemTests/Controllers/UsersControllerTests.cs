@@ -17,20 +17,20 @@ namespace SecretSanta.Web.SystemTests.Controllers
     public class UsersControllerTests
     {
         HttpClient apiClient = new();
+        HttpClient requestClient = new();
         [TestInitialize]
         public void Initialize()
         {
             if(apiClient.BaseAddress is null)
                 apiClient.BaseAddress = new Uri("https://secretsantacasey-api.azurewebsites.net");
+            if (requestClient.BaseAddress is null)
+                requestClient.BaseAddress = new Uri("https://secretsantacasey.azurewebsites.net");
         }
         [TestMethod]
         public async Task Index_WithUsers_RetrievesUsers()
         {
-            using WebApplicationFactory factory = new();
 
-            HttpClient client = factory.CreateClient();
-
-            HttpResponseMessage response = await client.GetAsync("/users/index");
+            HttpResponseMessage response = await requestClient.GetAsync("/users/index");
 
             response.EnsureSuccessStatusCode();
         }
@@ -38,8 +38,6 @@ namespace SecretSanta.Web.SystemTests.Controllers
         [TestMethod]
         public async Task Create_WithValidModel_CreatesUserAndReturnsToUsersIndex()
         {
-            using WebApplicationFactory factory = new();
-            HttpClient client = factory.CreateClient();
             UsersClient usersClient = new(apiClient);
             int id = int.MaxValue;
 
@@ -51,7 +49,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             };
             using FormUrlEncodedContent content = new(values);
 
-            HttpResponseMessage response = await client.PostAsync("/users/create", content);
+            HttpResponseMessage response = await requestClient.PostAsync("/users/create", content);
             string responseContent = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -67,8 +65,6 @@ namespace SecretSanta.Web.SystemTests.Controllers
         [TestMethod]
         public async Task Create_WithInvalidModel_DoesNotCreatesUserAndReturnsUsersCreatePage()
         {
-            using WebApplicationFactory factory = new();
-            HttpClient client = factory.CreateClient();
             UsersClient usersClient = new(apiClient);
             int id = int.MaxValue;
             string userFirstName = "UserFirstName";
@@ -80,7 +76,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             };
             using FormUrlEncodedContent content = new(values);
 
-            HttpResponseMessage response = await client.PostAsync("/users/create", content);
+            HttpResponseMessage response = await requestClient.PostAsync("/users/create", content);
             string responseContent = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -91,8 +87,6 @@ namespace SecretSanta.Web.SystemTests.Controllers
         [TestMethod]
         public async Task Edit_WithUserId_RetrievesUser()
         {
-            using WebApplicationFactory factory = new();
-            HttpClient client = factory.CreateClient();
             UsersClient usersClient = new(apiClient);
             int id = int.MaxValue;
             string userFirstName = "UserFirstName";
@@ -103,7 +97,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
                 LastName = "Smith"
             });
 
-            HttpResponseMessage response = await client.GetAsync($"/users/edit/{id}");
+            HttpResponseMessage response = await requestClient.GetAsync($"/users/edit/{id}");
             string responseContent = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -116,8 +110,6 @@ namespace SecretSanta.Web.SystemTests.Controllers
         [TestMethod]
         public async Task Edit_WithValidModel_UpdatesUser()
         {
-            using WebApplicationFactory factory = new();
-            HttpClient client = factory.CreateClient();
             UsersClient usersClient = new(apiClient);
             int id = int.MaxValue;
             string userFirstName = "UserFirstName";
@@ -136,7 +128,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             };
             using FormUrlEncodedContent content = new(values);
 
-            HttpResponseMessage response = await client.PostAsync("/users/edit", content);
+            HttpResponseMessage response = await requestClient.PostAsync("/users/edit", content);
             string responseContent = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
@@ -152,8 +144,6 @@ namespace SecretSanta.Web.SystemTests.Controllers
         [TestMethod]
         public async Task Edit_WithInvalidModel_DoesNotUpdateUser()
         {
-            using WebApplicationFactory factory = new();
-            HttpClient client = factory.CreateClient();
             UsersClient usersClient = new(apiClient);
             int id = int.MaxValue;
             string userFirstName = "UserFirstName";
@@ -171,7 +161,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
                 { nameof(UserViewModel.LastName), "" },
             };
             using FormUrlEncodedContent content = new(values);
-            HttpResponseMessage response = await client.PostAsync("/users/edit", content);
+            HttpResponseMessage response = await requestClient.PostAsync("/users/edit", content);
 
             response.EnsureSuccessStatusCode();
 
@@ -181,8 +171,6 @@ namespace SecretSanta.Web.SystemTests.Controllers
         [TestMethod]
         public async Task Delete_WithUserId_RemovesUsers()
         {
-            using WebApplicationFactory factory = new();
-            HttpClient client = factory.CreateClient();
             UsersClient usersClient = new(apiClient);
             int id = int.MaxValue;
             await usersClient.PostAsync(new Web.Api.User
@@ -197,7 +185,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
                 { nameof(UserViewModel.Id), id.ToString() }
             };
             using FormUrlEncodedContent content = new(values);
-            HttpResponseMessage response = await client.PostAsync("/users/delete", content);
+            HttpResponseMessage response = await requestClient.PostAsync("/users/delete", content);
 
             response.EnsureSuccessStatusCode();
             ICollection<Web.Api.User> users = await usersClient.GetAllAsync();
