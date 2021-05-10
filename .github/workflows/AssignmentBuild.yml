@@ -56,7 +56,17 @@ jobs:
 
     - name: dotnet publish Web
       run: dotnet publish ./src/SecretSanta.Web/SecretSanta.Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/Web
+      
+    - name: Get published contents
+      run: ls -R ${{env.DOTNET_ROOT}}/Web
 
+    - name: Copy Coverage Reports to Deployment Artifacts
+      run: |
+        mkdir ${{env.DOTNET_ROOT}}/Web/ApiTestCoverage/
+        cp -R ./test/SecretSanta.Api.Tests/coveragereport/ ${{env.DOTNET_ROOT}}/Web/ApiTestCoverage/
+        mkdir ${{env.DOTNET_ROOT}}/Web/WebTestCoverage/
+        cp -R ./test/SecretSanta.Web.Tests/coveragereport/ ${{env.DOTNET_ROOT}}/Web/WebTestCoverage/
+      
     - name: Upload API artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
