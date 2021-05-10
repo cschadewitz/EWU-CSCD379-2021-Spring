@@ -62,10 +62,10 @@ jobs:
 
     - name: Copy Coverage Reports to Deployment Artifacts
       run: |
-        mkdir ${{env.DOTNET_ROOT}}/Web/ApiTestCoverage/
-        cp -R ./test/SecretSanta.Api.Tests/coveragereport/ ${{env.DOTNET_ROOT}}/Web/ApiTestCoverage/
-        mkdir ${{env.DOTNET_ROOT}}/Web/WebTestCoverage/
-        cp -R ./test/SecretSanta.Web.Tests/coveragereport/ ${{env.DOTNET_ROOT}}/Web/WebTestCoverage/
+        mkdir ${{env.DOTNET_ROOT}}/Web/wwwroot/ApiTestCoverage/
+        cp -R ./test/SecretSanta.Api.Tests/coveragereport/ ${{env.DOTNET_ROOT}}/Web/wwwroot/ApiTestCoverage/
+        mkdir ${{env.DOTNET_ROOT}}/Web/wwwroot/WebTestCoverage/
+        cp -R ./test/SecretSanta.Web.Tests/coveragereport/ ${{env.DOTNET_ROOT}}/Web/wwwroot/WebTestCoverage/
       
     - name: Upload API artifact for deployment job
       uses: actions/upload-artifact@v2
