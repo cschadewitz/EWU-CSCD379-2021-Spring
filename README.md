@@ -12,3 +12,7 @@
 
 [![Swagger Docs](https://img.shields.io/badge/Swagger-API-1abc9c.svg)](https://secretsantacasey-api.azurewebsites.net/swagger/index.html)
 
+[![CodeCoverageApi](https://img.shields.io/badge/CodeCoverageReport-API-1abc9c.svg)](https://secretsantacasey.azurewebsites.net/ApiTestCoverage/index.html)
+
+[![CodeCoverageWeb](https://img.shields.io/badge/CodeCoverageReport-Web-1abc9c.svg)](https://secretsantacasey.azurewebsites.net/WebTestCoverage/index.html)
+
