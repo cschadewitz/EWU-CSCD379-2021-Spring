@@ -11,7 +11,7 @@ jobs:
     defaults:
       run:
         working-directory: ./SecretSanta/
-    runs-on:  windows-latest
+    runs-on:  ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -53,10 +53,10 @@ jobs:
       run: ls -R ./test/SecretSanta.Api.Tests/TestResults/
       
     - name: Run Coverage Report Generator for Api
-      run: reportgenerator "-reports:.\test\SecretSanta.Api.Tests\TestResults\*\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+      run: reportgenerator "-reports:.\test\SecretSanta.Api.Tests\TestResults\**\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
 
     - name: Run Coverage Report Generator for Web
-      run: reportgenerator "-reports:.\test\SecretSanta.Web.Tests\TestResults\*\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+      run: reportgenerator "-reports:.\test\SecretSanta.Web.Tests\TestResults\**\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
 
     - name: dotnet publish API
       run: dotnet publish ./src/SecretSanta.Api/SecretSanta.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/API
