@@ -45,6 +45,9 @@ jobs:
 
     - name: Get Directory
       run: pwd
+    
+    - name: List Contents of TestResults
+      run: ls -r ./test/SecretSanta.Api.Tests/TestResults/
       
     - name: Run Coverage Report Generator for Api
       run: reportgenerator "-reports:.\test\SecretSanta.Api.Tests\TestResults\*\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
