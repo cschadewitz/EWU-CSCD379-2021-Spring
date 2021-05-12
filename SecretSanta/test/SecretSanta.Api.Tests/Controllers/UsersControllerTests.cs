@@ -20,7 +20,7 @@ namespace SecretSanta.Api.Tests.Controllers
     {
         WebApplicationFactory Factory;
         HttpClient Client;
-        public Mock<IUserRepository> MockUserRepository { get; } = new();
+        public Mock<IRepository<User>> MockUserRepository { get; } = new();
         public Mock<IMapper> MockMapper { get; } = new();
 
         private void Setup()
@@ -28,7 +28,7 @@ namespace SecretSanta.Api.Tests.Controllers
             ConfigureMocks();
             Dictionary<Type, IEntityRepository> requiredEntityRepositories = new()
             {
-                { typeof(IUserRepository), MockUserRepository.Object }
+                { typeof(IRepository<User>), MockUserRepository.Object }
             };
             Factory = new(requiredEntityRepositories);
             Client = Factory.CreateClient();

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SecretSanta.Business;
 using AutoMapper;
+using SecretSanta.Data;
 
 namespace SecretSanta.Api
 {
@@ -16,7 +17,7 @@ namespace SecretSanta.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRepository<User>, UserRepository>();
             services.AddControllers();
             services.AddAutoMapper(typeof(MappingProfileApi));
             services.AddSwaggerDocument();

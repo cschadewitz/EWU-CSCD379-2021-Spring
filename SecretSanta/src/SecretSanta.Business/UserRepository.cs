@@ -3,7 +3,7 @@ using SecretSanta.Data;
 
 namespace SecretSanta.Business
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<User>
     {
         public User Create(User item)
         {

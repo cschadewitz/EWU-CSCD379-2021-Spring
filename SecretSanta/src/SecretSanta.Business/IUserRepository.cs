@@ -3,12 +3,12 @@ using SecretSanta.Data;
 
 namespace SecretSanta.Business
 {
-    public interface IUserRepository : IEntityRepository
+    public interface IRepository<T> : IEntityRepository
     {
-        ICollection<User> List();
-        User? GetItem(int id);
+        ICollection<T> List();
+        T? GetItem(int id);
         bool Remove(int id);
-        User Create(User item);
-        void Save(User item);
+        T Create(T item);
+        void Save(T item);
     }
 }
