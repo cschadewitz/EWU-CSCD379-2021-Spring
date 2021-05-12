@@ -1,19 +1,32 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using SecretSanta.Api.Tests.Business;
 using SecretSanta.Business;
 
 namespace SecretSanta.Api.Tests
 {
-    internal class WebApplicationFactory : WebApplicationFactory<Startup>
+    public class WebApplicationFactory : WebApplicationFactory<Startup>
     {
-        internal TestableUserRepository UserRepository { get; } = new();
+
+        Dictionary<Type, IEntityRepository> EntityRepositories { get; }
+        public WebApplicationFactory(Dictionary<Type,IEntityRepository> requiredEntityRepositories)
+        {
+
+            EntityRepositories = requiredEntityRepositories ?? throw new ArgumentNullException(nameof(requiredEntityRepositories));
+        }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.ConfigureServices(services => {
-                services.AddScoped<IUserRepository, TestableUserRepository>(_ => UserRepository);
+            builder.ConfigureServices(services =>
+            {
+                foreach(KeyValuePair<Type, IEntityRepository> repo in EntityRepositories)
+                {
+                    services.AddSingleton(repo.Key, repo.Value);
+                }
+                
+                services.AddAutoMapper(typeof(MappingProfileApi));
             });
         }
     }

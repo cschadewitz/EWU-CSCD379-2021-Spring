@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SecretSanta.Api.DTO;
 using SecretSanta.Business;
 
 namespace SecretSanta.Api.Controllers
@@ -11,29 +12,35 @@ namespace SecretSanta.Api.Controllers
     public class UsersController : ControllerBase
     {
         private IUserRepository Repository { get; }
+        private IMapper Mapper { get; }
 
-        public UsersController(IUserRepository repository)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            Repository = repository ?? throw new System.ArgumentNullException(nameof(repository));
+            Repository = userRepository ?? throw new System.ArgumentNullException(nameof(userRepository));
+            Mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
-        public IEnumerable<Dto.User> Get()
+        [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]
+        public IEnumerable<UserDTO> Get()
         {
-            return Repository.List().Select(x => ToDto(x)!);
+            return Mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(Repository.List());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Dto.User?> Get(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+        public ActionResult<UserDTO?> Get(int id)
         {
-            Dto.User? user = ToDto(Repository.GetItem(id));
-            if (user is null) return NotFound();
-            return user;
+            User? user = Repository.GetItem(id);
+            if (user is null) 
+                return NotFound();
+            return Mapper.Map<User, UserDTO>(user);
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult Delete(int id)
         {
             if (Repository.Remove(id))
@@ -44,19 +51,22 @@ namespace SecretSanta.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(Dto.User), (int)HttpStatusCode.OK)]
-        public ActionResult<Dto.User?> Post([FromBody] Dto.User user)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+        public ActionResult<UserDTO?> Post([FromBody] UserDTO? user)
         {
-            return ToDto(Repository.Create(FromDto(user)!));
+            if (user is null)
+            {
+                return BadRequest();
+            }
+            return Mapper.Map<User, UserDTO>(Repository.Create(Mapper.Map<UserDTO, User>(user)));
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Null check is performed but not recognized by analyzer")]
-        public ActionResult Put(int id, [FromBody] Dto.UpdateUser? user)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult Put(int id, [FromBody] UserDTO? user)
         {
             Data.User? foundUser = Repository.GetItem(id);
             if (foundUser is not null && user is not null)
