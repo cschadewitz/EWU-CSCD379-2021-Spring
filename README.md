@@ -1,5 +1,7 @@
 # Assignment 6
 
+[![AssignmentBranch](https://img.shields.io/badge/Assignment-Branch-1abc9c.svg)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/tree/Assignment6)
+
 ## Status Overview
 
 [![Build And Test](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml/badge.svg)](https://github.com/cschadewitz/EWU-CSCD379-2021-Spring/actions/workflows/AssignmentBuild.yml)
