@@ -369,7 +369,13 @@ namespace SecretSanta.Web.Api
                             throw new ApiException("A server side error occurred.", status_, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == 204)
+                        if (status_ == 302)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("A server side error occurred.", status_, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == 200 || status_ == 204)
                         {
                             return;
                         }

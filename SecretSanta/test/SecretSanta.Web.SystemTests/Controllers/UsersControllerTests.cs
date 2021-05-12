@@ -49,7 +49,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             string responseContent = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
-            Web.Api.User? createdUser = await usersClient.GetAsync(id);
+            Web.Api.UserDTO? createdUser = await usersClient.GetAsync(id);
             Assert.AreEqual(id, createdUser.Id);
             Assert.AreEqual("John", createdUser.FirstName);
             Assert.AreEqual("Smith", createdUser.LastName);
@@ -86,7 +86,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             UsersClient usersClient = new(_ApiClient);
             int id = int.MaxValue;
             string userFirstName = "UserFirstName";
-            await usersClient.PostAsync(new Web.Api.User
+            await usersClient.PostAsync(new Web.Api.UserDTO
             {
                 Id = id,
                 FirstName = userFirstName,
@@ -109,7 +109,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             UsersClient usersClient = new(_ApiClient);
             int id = int.MaxValue;
             string userFirstName = "UserFirstName";
-            await usersClient.PostAsync(new Web.Api.User
+            await usersClient.PostAsync(new Web.Api.UserDTO
             {
                 Id = id,
                 FirstName = "John",
@@ -128,7 +128,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             string responseContent = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
-            Web.Api.User? createdUser = await usersClient.GetAsync(id);
+            Web.Api.UserDTO? createdUser = await usersClient.GetAsync(id);
             Assert.AreEqual(id, createdUser.Id);
             Assert.AreEqual(userFirstName, createdUser.FirstName);
             Assert.AreEqual("Doe", createdUser.LastName);
@@ -143,7 +143,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             UsersClient usersClient = new(_ApiClient);
             int id = int.MaxValue;
             string userFirstName = "UserFirstName";
-            await usersClient.PostAsync(new Web.Api.User
+            await usersClient.PostAsync(new Web.Api.UserDTO
             {
                 Id = id,
                 FirstName = "John",
@@ -169,7 +169,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
         {
             UsersClient usersClient = new(_ApiClient);
             int id = int.MaxValue;
-            await usersClient.PostAsync(new Web.Api.User
+            await usersClient.PostAsync(new Web.Api.UserDTO
             {
                 Id = id,
                 FirstName = "John",
@@ -184,7 +184,7 @@ namespace SecretSanta.Web.SystemTests.Controllers
             HttpResponseMessage response = await _RequestClient.PostAsync(new Uri("/users/delete", UriKind.Relative), content);
 
             response.EnsureSuccessStatusCode();
-            ICollection<Web.Api.User> users = await usersClient.GetAllAsync();
+            ICollection<Web.Api.UserDTO> users = await usersClient.GetAllAsync();
             Assert.IsFalse(users.Where(u => u.Id == id).Any());
         }
     }

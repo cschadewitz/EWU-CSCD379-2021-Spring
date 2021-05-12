@@ -26,18 +26,6 @@ namespace SecretSanta.Web.Controllers
             return View(userViewModels);
         }
 
-        public async Task<IActionResult> Index()
-        {
-            ICollection<User>? users = await UserClient.GetAllAsync();
-            var userViewModels = users.Select(x => new UserViewModel
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName
-            }).ToList();
-            return View(userViewModels);
-        }
-
         public IActionResult Create()
         {
             return View();

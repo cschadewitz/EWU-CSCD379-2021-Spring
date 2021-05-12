@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SecretSanta.Api.DTO;
 using SecretSanta.Business;
+using SecretSanta.Data;
 
 namespace SecretSanta.Api.Controllers
 {
@@ -40,7 +41,7 @@ namespace SecretSanta.Api.Controllers
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status302Found)]
         public ActionResult Delete(int id)
         {
             if (Repository.Remove(id))
@@ -78,28 +79,6 @@ namespace SecretSanta.Api.Controllers
                 return Ok();
             }
             return NotFound();
-        }
-
-        private static Dto.User? ToDto(Data.User? user)
-        {
-            if (user is null) return null;
-            return new Dto.User
-            {
-                FirstName = user.FirstName,
-                Id = user.Id,
-                LastName = user.LastName
-            };
-        }
-
-        public static Data.User? FromDto(Dto.User? user)
-        {
-            if (user is null) return null;
-            return new Data.User
-            {
-                Id = user.Id,
-                FirstName = user.FirstName ?? "",
-                LastName = user.LastName ?? ""
-            };
         }
     }
 }
