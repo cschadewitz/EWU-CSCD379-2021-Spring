@@ -1,5 +1,8 @@
-﻿namespace SecretSanta.Data
+﻿using Devise;
+namespace SecretSanta.Data
 {
+    [Devise]
+    [DeviseCustom("Api", Create: true)]
     public class User
     {
         public int Id { get; set; }

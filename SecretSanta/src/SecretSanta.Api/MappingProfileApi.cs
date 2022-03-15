@@ -4,12 +4,12 @@ using SecretSanta.Api.DTO;
 
 namespace SecretSanta.Api
 {
-    public class MappingProfileApi : Profile
+    public partial class MappingProfileApi : Profile
     {
-        public MappingProfileApi()
+        partial void CustomMaps()
         {
-            CreateMap<UserDTO, User>();
-            CreateMap<User, UserDTO>();
+            CreateMap<GroupDTO, Group>();
+            CreateMap<Group, GroupDTO>();
         }
     }
 }

@@ -26,7 +26,7 @@ namespace SecretSanta.Api.Tests
                     services.AddSingleton(repo.Key, repo.Value);
                 }
                 
-                services.AddAutoMapper(typeof(MappingProfileApi));
+                services.AddAutoMapper(typeof(SecretSanta.Api.MappingProfileApi));
             });
         }
     }
